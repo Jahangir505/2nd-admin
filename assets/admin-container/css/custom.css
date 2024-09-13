@@ -1,0 +1,37 @@
+
+
+.tb_form {
+  position: relative;
+  padding: .9375rem .9375rem .9375rem .9375rem;
+  border: 0 solid transparent;
+}
+.search-div{
+  background: #eaeaea;
+  padding: 3px 5px;
+  position: relative;
+}
+.custom-sniper-container {
+  position: relative !important;
+}
+.custom-sniper {
+  position: absolute;
+}
+
+.activeYes{
+  background-color: green;
+  color: #fff;
+}
+
+.activeNo{
+  background-color: red;
+  color: #fff;
+}
+
+.index-total-count{
+  margin-left: 50px;
+  color: red;
+}
+
+.loader-cont row{
+  position: relative;
+}

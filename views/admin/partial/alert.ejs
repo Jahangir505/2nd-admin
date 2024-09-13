@@ -1,0 +1,31 @@
+<% if(flashMsgError && flashMsgError.length > 0 ) { %>
+  <div class="alert_message">
+          <ul>
+              <% flashMsgError.forEach(function(sinMsg) { %>
+                  <li>
+                      <div class="alert alert-warning alert-dismissible fade show m-0 py-3">
+                          <strong>Warning!</strong>
+                          <%= sinMsg %> <i class="fas fa-lg fa-fw me-10px fa-warning"></i>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      </div>
+                  </li>
+              <% }) %>
+          </ul>
+  </div>
+<% } %>
+
+<% if(flashMsgSuccess && flashMsgSuccess.length > 0 ) { %>
+  <div class="alert_message">
+          <ul>
+              <% flashMsgSuccess.forEach(function(sinMsg) { %>
+                  <li>
+                      <div class="alert alert-green alert-dismissible fade show m-0 py-3">
+                          <strong>Success!</strong>
+                          <%= sinMsg %> <i class="fas fa-lg fa-fw me-10px fa-face-smile"></i>
+                          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      </div>
+                  </li>
+              <% }) %>
+          </ul>
+  </div>
+<% } %>

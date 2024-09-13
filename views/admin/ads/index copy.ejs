@@ -1,0 +1,280 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'all-user'}) %>
+
+<!-- ********************* Content Start ********************************* -->
+<div id="content" class="app-content p-0 bg-component">
+    <div class="app-content-padding px-4 py-3">
+    <div class="d-lg-flex mb-lg-3 mb-2">
+        <h1 class="page-header mb-0 flex-1">All <%= title %> <small><a href="<%= linknew %>" class="btn btn-danger btn-sm"><i class="fa fa-plus"></i> Add New</a></small></h1>
+        <span class="d-none d-lg-flex align-items-right">
+            <button type="button" class="btn btn-success btn-sm me-1 mb-1"><i class="fa fa-redo fa-sm"></i> Reload</button> 
+            <button type="button" class="btn btn-primary btn-sm me-1 mb-1"><i class="fa fa-print fa-sm"></i> Print</button> 
+            <button type="button" class="btn btn-gray btn-sm me-1 mb-1"><i class="fa fa-file-excel fa-sm"></i> Excel</button> 
+            <button type="button" class="btn btn-dark btn-sm me-1 mb-1"><i class="fa fa-file-pdf fa-sm"></i> PDF</button> 
+        </span>
+    </div>
+    <div class="row gx-4 pb-10px search-div" ng-controller="demoController">
+        <form class="needs-validation" novalidate action=<%= paginateUrl %> method="GET" enctype="multipart/form-data">
+            <div class="col-lg-2 ps-2 pe-1 d-lg-block d-none">
+                <div class="position-relative">
+                <input type="text" name="email" class="form-control ps-35px rounded-2" id="email" placeholder="example@domain.com" value="<%= paEmail %>">
+                </div>
+            </div>
+            <div class="col-lg-2 px-1 d-lg-block d-none">
+                    <select name="status" class="default-select2 form-control" id="Status">
+                        <option value="">Please Select</option>
+                        <option value="1" <%= paStatus == '1' ? 'selected' : '' %>>Active</option>
+                        <option value="2" <%= paStatus == '2' ? 'selected' : '' %>>Deactive</option>
+                        <option value="3" <%= paStatus == '3' ? 'selected' : '' %>>Pending</option>
+                        <option value="4" <%= paStatus == '4' ? 'selected' : '' %>>Suspend</option>
+                    </select>
+            </div>
+            
+            <div class="col-lg-2 px-1 d-lg-block d-none">
+                    <select name="userRole" class="default-select2 form-control" id="userRole">
+                        <option value="">Please Select</option>
+                        <option value="1" <%= (paUserRole == 1) ? 'selected' : '' %>>Admin</option>
+                        <option value="2" <%= (paUserRole == 2) ? 'selected' : '' %>>Employer</option>
+                        <option value="3" <%= (paUserRole == 3) ? 'selected' : '' %>>Employee</option>
+                        <option value="4" <%= (paUserRole == 4) ? 'selected' : '' %>>Customer</option>
+                    </select>
+            </div>
+            
+            <div class="col-lg-1 ps-1 d-lg-block d-none">
+                <button type="submit" id="searchBtn" ng-click="abc()" class="btn btn-success btn-sm submit-btn"><i class="fa fa-paper-plane fa-sm"></i> Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="d-lg-flex align-items-center mb-n2">
+        <div class="d-lg-flex d-none align-items-center text-nowrap">
+            Results per page:
+            <select class="form-select form-select-sm ms-2 h-25px py-0 ps-2 pe-30px">
+                <option>100</option>
+                <option>50</option>
+                <option selected>30</option>
+            </select>
+        </div>
+        <div class="d-lg-block d-none ms-2 text-body text-opacity-50">
+            <%= totalCount %> results found
+        </div>
+        <% if (pageCount > 1) { %>
+            <ul class="pagination pagination-sm mb-0 ms-auto justify-content-center">
+
+                <% if (currentPage == 1) { %>
+                    <li class="page-item disabled"><a class="page-link"
+                                                      href="<%= paginateUrl %>?page=1<%= paginateVariable %>">&laquo;</a>
+                    </li>
+                    <li class="page-item disabled"><a class="page-link"
+                                                      href="<%= paginateUrl %>?page=1<%= paginateVariable %>">Previous</a>
+                    </li>
+                <% } %>
+
+                <% if (currentPage > 1) { %>
+                    <li class="page-item d-lg-block d-none2"><a class="page-link"
+                                             href="<%= paginateUrl %>?page=1<%= paginateVariable %>">&laquo;</a>
+                    </li>
+                    <li class="page-item d-lg-block d-none2"><a class="page-link"
+                                             href="<%= paginateUrl %>?page=<%= currentPage - 1 %><%= paginateVariable %>">Previous</a>
+                    </li>
+                    
+                <% } %>
+
+                <% var i = 1;
+                    if (currentPage > 5) {
+                        i = +currentPage - 4;
+                } %>
+                <% if (i !== 1) { %>
+                    <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                <% } %>
+
+
+                <% for (i; i <= pageCount; i++) { %>
+                    <% if (currentPage == i) { %>
+                        <li class="page-item d-lg-block d-none2 active"><a class="page-link bg-theme text-theme-color border border-theme" href="#"><span><%= i %> <span
+                                            class="sr-only">(current)</span></span></a></li>
+                    <% } else { %>
+                        <li class="page-item d-lg-block d-none2"><a class="page-link"
+                                                    href="<%= paginateUrl %>?page=<%= i %><%= paginateVariable %>"><%= i %></a>
+                        </li>
+                <% } %>
+
+                <% if (i == (+currentPage + 4)) { %>
+                        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                    <% break; } %>
+                <% } %>
+
+                <% if (currentPage != pageCount) { %>
+                    <li class="page-item page-item d-lg-block d-none2"><a class="page-link"
+                                                href="<%= paginateUrl %>?page=<%= (+currentPage + 1) %><%= paginateVariable %>">
+                            Next</a></li>
+                    <li class="page-item page-item d-lg-block d-none2"><a class="page-link"
+                                                href="<%= paginateUrl %>?page=<%= pageCount %><%= paginateVariable %>">&raquo;</a>
+                    </li>
+                <% } %>
+
+                <% if (currentPage == pageCount) { %>
+                    <li class="page-item disabled"><a class="page-link"
+                                                        href="<%= paginateUrl %>?page=1<%= paginateVariable %>">Next</a>
+                    </li>
+                    <li class="page-item disabled"><a class="page-link"
+                                                        href="<%= paginateUrl %>?page=<%= pageCount %><%= paginateVariable %>">&raquo;</a>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+    </div>
+    </div>
+    <div class="table-responsive" id="table">
+        <% if(flashMsgError && flashMsgError.length > 0 ) { %>
+                        <div class="alert alert-danger custom-alert">
+                            <% if(flashMsgError.length === 1) { %>
+                                <strong> <%= flashMsgError %> </strong>
+                            <% } else { %>
+                                <ul>
+                                    <% flashMsgError.forEach(function(err) { %>
+                                        <li><strong> <%= err %> </strong></li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                        </div>
+                    <% } %>
+                    <% if(flashMsgSuccess && flashMsgSuccess.length > 0 ) { %>
+                        <div class="alert alert-success custom-alert">
+                            <% if(flashMsgSuccess.length === 1) { %>
+                                <strong> <%= flashMsgSuccess %> </strong>
+                            <% } else { %>
+                                <ul>
+                                    <% flashMsgSuccess.forEach(function(err) { %>
+                                        <li><strong> <%= err %> </strong></li>
+                                    <% }) %>
+                                </ul>
+                            <% } %>
+                        </div>
+                    <% } %>
+    <table class="table table-thead-sticky table-tfoot-sticky table-tbody-bordered table-px-10px table-py-4px table-sm table-striped text-nowrap mb-0">
+        <thead>
+            <tr>
+                <th class="text-nowrap">#</th>
+                <th class="text-nowrap">Img</th>
+                <th class="text-nowrap">F/Name</th>
+                <th class="text-nowrap">L/Name</th>
+                <th class="text-nowrap">Mobile</th>
+                <th class="text-nowrap">Email</th>
+                <th class="text-nowrap">Role</th>
+                <th class="text-nowrap">Created</th>
+                <th><span data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Action"><i class="fa fa-ellipsis-h"></i></span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(alldata, function (singledata, key) { %>
+                <tr>
+                    <td width="1%" class="fw-bold text-dark"><%= key + 1 %></td>
+                    <td width="1%"><img src="/uploads/user-image/<%= singledata.image %>" class="rounded h-20px my-n1 mx-n1 mw-100 rounded-pill" /></td>
+                    <td><%= singledata.first_name %></td>
+                    <td><%= singledata.last_name %></td>
+                    <td><%= singledata.mobile_no %></td>
+                    <td><%= singledata.email %></td>
+                    <td class="<%= singledata.user_role > 0 ? 'activeYes' : 'activeNo' %>">
+                        <%= (singledata.user_role == 1) ? 'Admin' : '' %>
+                        <%= (singledata.user_role == 2) ? 'Employer' : '' %>
+                        <%= (singledata.user_role == 3) ? 'Employee' : '' %>
+                        <%= (singledata.user_role == 4) ? 'Customer' : '' %>
+                    </td>
+                    <td><%= singledata.createdAt ? moment(singledata.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td ng-controller="commonActionController">
+                    <div class="dropdown-toggle">
+                        <a href="#" data-bs-toggle="dropdown" class="text-decoration-none text-dark text-opacity-75" aria-expanded="false"> <i class="fa fa-ellipsis-h"></i></a>
+                        <div class="dropdown-menu" style="" >
+                            <a class="dropdown-item" href="/admin/user/edit/<%= singledata.id %>"><i class="fa fa-edit"></i> Edit</a>
+                            <a class="dropdown-item" href="/admin/user/change-password/<%= singledata.id %>"><i class="fa fa-edit"></i> Change Password</a>
+                            <a class="dropdown-item" href="/admin/user/view/<%= singledata.id %>"><i class="fa fa-eye"></i> View</a>
+                            <form id="itemDeleteForm<%= singledata.id %>" action='/admin/user/delete'
+                                          method='post' style="display: inline">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="id" value="<%= singledata.id %>">
+                                <a class="dropdown-item" ng-click="clickMeForDelete($event, '<%= singledata.id %>')" href="#delete" data-bs-toggle="modal"><i class="fa fa-times"></i> Delete</a>
+                            </form>
+                        </div>
+                    </div>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    </div>
+</div>
+<!-- ********************* Content End *********************************** -->
+
+<!-- ********************* Panel Start *********************************** -->
+<div class="theme-panel">
+    <a href="javascript:;" data-toggle="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-eye"></i></a>
+    <div class="theme-panel-content" data-scrollbar="true" data-height="100%">
+       <form class="needs-validation" novalidate>
+          <div class="form-group mb-3">
+             <div class="note alert-gray-500 mb-2">
+                <div class="note-content">
+                   <h4><%= title %> Report</h4>
+                </div>
+             </div>
+          </div>
+          <div class="form-group mb-3">
+             <label for="start_date" class="form-label"><strong>Start Date</strong></label>
+             <input type="date" id="start_date" class="form-control" placeholder="Please Select" required />
+             <div class="valid-feedback">
+                Looks good!
+             </div>
+             <div class="invalid-feedback">
+                Please select start date.
+             </div>
+          </div>
+          <div class="form-group mb-3">
+             <label for="end_date" class="form-label"><strong>End Date</strong></label>
+             <input type="date" id="end_date" class="form-control" placeholder="Please Select" required />
+             <div class="valid-feedback">
+                Looks good!
+             </div>
+             <div class="invalid-feedback">
+                Please select end date.
+             </div>
+          </div>
+          <div class="form-group mb-3">
+             <label for="status" class="form-label"><strong>Status</strong></label>
+               <select id="status" class="default-select2 form-control" required>
+                   <option value="">Select Status</option>
+                   <option value="1">Active</option>
+                   <option value="2">Inactive</option>
+                   <option value="1">Removed</option>
+                   <option value="2">Pending</option>
+                   <option value="1">Archived</option>
+                </select>
+             <div class="valid-feedback">
+                Looks good!
+             </div>
+             <div class="invalid-feedback">
+                Please select status.
+             </div>
+          </div>
+          <div class="form-group mb-3">
+             <label for="download" class="form-label"><strong>Download</strong></label>
+             <select id="download" class="default-select2 form-control" required>
+                   <option value="">Select Format</option>
+                   <option value="1">Excel Sheet</option>
+                   <option value="2">PDF</option>
+                   <option value="3">MS Word</option>
+                </select>
+             <div class="valid-feedback">
+                Looks good!
+             </div>
+             <div class="invalid-feedback">
+                Please select download format.
+             </div>
+          </div>
+          <div class="form-group">
+             <button type="submit" class="btn btn-sm btn-dark">Submit</button>
+          </div>
+       </form>
+    </div>
+</div>
+<!-- ********************* Panel End ************************************* -->
+
+
+

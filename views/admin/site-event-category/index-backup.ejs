@@ -1,0 +1,85 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'country'}) %>
+<div id="content" class="app-content p-0 bg-component" ng-controller="contentBlockController">
+    <div class="app-content-padding px-4 py-2">
+        <!-- ********** Breadcrumbs Start *********** -->
+        <div class="d-lg-flex mb-lg-3 mb-2">
+            <h1 class="page-header mb-0 flex-1">All <%= title %> <a href="<%= linknew %>"> <button type="button" class="btn btn-sm btn-outline-dark fw-bold">Add New</button></a></h1>
+            <span class="d-none d-lg-flex align-items-center">
+                <ol class="breadcrumb float-xl-end">
+                   <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+                   <li class="breadcrumb-item"><%= module %></li>
+                   <li class="breadcrumb-item"><%= submodule %></li>
+                </ol>
+             </span>
+        </div>
+        <!-- ********** Breadcrumbs End *********** -->
+        <!-- ********** Filter Start **********-->
+        <form style="float: left;" class="needs-validation" id="filterForm" action=<%= paginateUrl %> method="GET" enctype="multipart/form-data">
+            <div class="row gx-2">
+                <div class="col-lg-2 d-lg-block">
+                    <div class="position-relative">
+                        <input type="text" class="form-control ps-35px rounded-1 border-0" placeholder="Please type your keywords..." name="name" id="name" value="<%= paName %>" />
+                        <button class="btn position-absolute start-0 top-0 shadow-none"><i class="fa fa-search fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="sort_by" id="sort_by">
+                        <option value="">Select Filter</option>
+                        <option value="ASC"  <%= paSortBy == 'ASC' ? 'selected' : '' %>>A To Z</option>
+                        <option value="DESC"  <%= paSortBy == 'DESC' ? 'selected' : '' %>>Z To A</option>
+                    </select>
+                </div>
+                <div class="col-lg-1 d-lg-block">
+                    <input type="hidden" class="form-control" id="page_limit" name="page_limit" ng-model="fltFrmObj.pagelimit" ng-change="myFuncPP()" ng-init="fltFrmObj.pagelimit='<%= pageLimit %>'" value="{{fltFrmObj.pagelimit}}" />
+                    <button type="submit" class="btn btn-dark btn-md submit-btn"><i class="fa fa-paper-plane fa-sm"></i> Submit</button>
+                </div>
+            </div>
+        </form>
+        <!-- ********** Filter End ********** -->
+    </div>
+
+    <!-- ********** Table Data Start ********** -->
+    <div class="table-responsive" id="table">
+        <table class="table table-thead-sticky table-tfoot-sticky table-tbody-bordered table-px-10px table-py-4px align-middle table-sm table-striped text-nowrap mb-0">
+            <thead>
+            <tr>
+                <th><span>#</span></th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Slug</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% _.each(alldata, function (singledata, key) { %>
+                <tr>
+                    <td><%= key + 1 %></td>
+                    <td><%= singledata.code %></td>
+                    <td><%= singledata.name %></td>
+                    <td><%= (singledata.status == 1) ? 'Active':'Inactive' %></td>
+                    <td><%= singledata.slug %></td>
+                    <td><%= singledata.createdAt ? moment(singledata.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td><%= singledata.updatedAt ? moment(singledata.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td ng-controller="commonActionController">
+                        <a href="/admin/country/edit/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link p-0 m-0 fs-12px"><i class="fa fa-pencil text-dark"></i></button></a>
+                        <a href="/admin/country/view/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link text-success fs-13px p-0 m-0"><i class="fa fa-eye text-dark"></i></button></a>
+                        <form id="itemDeleteForm<%= singledata.id %>" action='/admin/country/delete'
+                              method='post' style="display: inline">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="id" value="<%= singledata.id %>">
+                            <a ng-click="clickMeForDelete($event, '<%= singledata.id %>', '<%= JSON.stringify(singledata.name) %>')" href="#" ><button type="button" class="btn btn-sm btn-link p-0 m-0 fs-14px"><i class="fa fa-times text-dark fw-bold fs-16px"></i></button></a>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <!-- ********** Table Data End ********** -->
+    <!-- ********** Pagination Start **********-->
+    <%- partial('../../admin/partial/index-pagination.ejs', {pageLimit: pageLimit, pageCount: pageCount, currentPage: currentPage, adjacents: adjacents, lpm1: lpm1, paginateVariable:paginateVariable, paginateUrl: paginateUrl}) %>
+    <!-- ********** Pagination End ********** -->
+</div>

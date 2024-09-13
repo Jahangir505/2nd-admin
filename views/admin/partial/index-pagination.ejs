@@ -1,0 +1,110 @@
+  <% if (pageCount > 1) { %>
+    <div class="d-lg-flex align-items-center mb-n2 p-3" >
+            <div class="d-lg-flex align-items-center text-nowrap">
+                Results per page:
+                <select class="page_limit form-select form-select-sm ms-2 h-25px py-0 ps-2 pe-30px" ng-change="pageLimitSelectChange()" ng-model="fltFrmObj.pagelimitSel" ng-init="fltFrmObj.pagelimitSel='<%= pageLimit %>'" id="page_limit_change">
+                    <option value="10" <%= (pageLimit == 10) ? 'selected' : '' %>>10</option>
+                    <option value="20" <%= (pageLimit == 20) ? 'selected' : '' %>>20</option>
+                    <option value="30" <%= (pageLimit == 30) ? 'selected' : '' %>>30</option>
+                    <option value="50" <%= (pageLimit == 50) ? 'selected' : '' %>>50</option>
+                    <option value="75" <%= (pageLimit == 75) ? 'selected' : '' %>>75</option>
+                    <option value="100" <%= (pageLimit == 100) ? 'selected' : '' %>>100</option>
+                    <option value="200" <%= (pageLimit == 200) ? 'selected' : '' %>>200</option>
+                </select>
+            </div>
+            <div class="ms-2 text-body text-opacity-50">
+              <%= totalCount %> results found
+            </div>
+
+        
+            <ul class="pagination pagination-sm mb-0 ms-auto justify-content-center">
+
+                <% if (currentPage == 1) { %>
+                <!-- <li class="page-item disabled"><a class="page-link" href="<%=paginateUrl%>?page=1<%= paginateVariable %>">&laquo;</a></li> -->
+                <li class="page-item disabled"><a class="page-link" href="<%=paginateUrl%>?page=1<%= paginateVariable %>">Previous</a></li>
+                <% } %>
+
+
+                <% if (currentPage > 1) { %>
+                <!-- <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=1<%= paginateVariable %>">&laquo;</a></li> -->
+                <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= currentPage-1 %><%= paginateVariable %>">Previous</a></li>
+                <% } %>
+
+                <% if (parseInt(pageCount) < 7 + (parseInt(adjacents) * 2)) {%>
+                      <!-- ***********For Start************* -->
+                      <% for (var counter = 1; counter <= pageCount; counter++) {%>
+                          <% if (counter == currentPage) {%>
+                              <li class="page-item active"><a class="page-link bg-dark text-theme-color border border-theme" href="#"><span><%= counter %> <span class="sr-only">(current)</span></span></a></li>
+                            <% } else { %>
+                              <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= counter %><%= paginateVariable %>"><%= counter %></a></li>
+                            <% } %>
+                      <% }%>
+                      <!-- ***********For End************* -->
+                <% } else if(pageCount > 5 + (parseInt(adjacents) * 2)) {%>
+
+                            <% if(currentPage < 1 + (adjacents * 2)){%>
+                                  <!-- ***********For Start************* -->
+                                    <% for (var counter = 1; counter < 4 + (adjacents * 2); counter++) {%>
+                                        <% if (counter == currentPage) {%>
+                                          <li class="page-item active"><a class="page-link bg-dark text-theme-color border border-theme " href="#"><span><%= counter %><span class="sr-only">(current)</span></span></a></li>
+                                        <% } else { %>
+                                          <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= counter %><%= paginateVariable %>"><%= counter %></a></li>
+                                        <% } %>
+                                    <% }%>
+                                  <!-- ***********For End************* -->
+
+                                  <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                                  <!-- <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= lpm1%>"><%= lpm1 %></a></li> -->
+                                  <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= pageCount %>"><%= pageCount%></a></li>
+                                
+                              
+                            <% } else if((pageCount - (parseInt(adjacents) * 2) > parseInt(currentPage)) && (parseInt(currentPage) > (parseInt(adjacents) * 2))) {%>
+                                  <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=1">1</a></li>
+                                  <!-- <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=2">2</a></li> -->
+                                  <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                                  <!-- ***********For Start************* -->
+                                  <% for (var counter = ( parseInt(currentPage) - parseInt(adjacents) ); counter <= ( parseInt(currentPage) + parseInt(adjacents) ); counter++) {%>
+                                    <% if (counter == currentPage) {%>
+                                      <li class="page-item active"><a class="page-link bg-dark text-theme-color border border-theme" href="#"><span><%= counter %><span class="sr-only">(current)</span></span></a></li>
+                                    <% } else { %>
+                                      <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= counter %><%= paginateVariable %>"><%= counter %></a></li>
+                                    <% } %>
+                                  <% }%>
+                                  <!-- ***********For End************* -->
+                                  <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                                  <!-- <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= lpm1%>"><%= lpm1 %></a></li> -->
+                                  <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= pageCount %>"><%= pageCount%></a></li>
+                                
+      
+
+                            <% } else { %>
+
+                                  <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=1">1</a></li>
+                                  <!-- <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=2">2</a></li> -->
+                                  <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+                                <!-- ***********For Start************* -->
+                                <% for (var counter = parseInt(pageCount) - (2 + (parseInt(adjacents) * 2)); counter <= parseInt(pageCount); counter++) {%>
+                                  <% if (counter == currentPage) {%>
+                                    <li class="page-item active"><a class="page-link bg-dark text-theme-color border border-theme" href="#"><span><%= counter %><span class="sr-only">(current)</span></span></a></li>
+                                  <% } else { %>
+                                    <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= counter %><%= paginateVariable %>"><%= counter %></a></li>
+                                  <% } %>
+                                <% }%>
+                                <!-- ***********For End************* -->
+
+                              <% } %>
+
+                <% }%>
+
+                <% if (currentPage != pageCount) { %>
+                  <li class="page-item "><a class="page-link" href="<%=paginateUrl%>?page=<%= (+currentPage + 1) %><%= paginateVariable %>"> Next</a></li>
+                  <!-- <li class="page-item"><a class="page-link" href="<%=paginateUrl%>?page=<%= pageCount %><%= paginateVariable %>">&raquo;</a></li> -->
+                  <% } %>
+      
+                  <% if (currentPage == pageCount) { %>
+                  <li class="page-item disabled"><a class="page-link" href="<%=paginateUrl%>?page=1<%= paginateVariable %>">Next</a></li>
+                  <!-- <li class="page-item disabled"><a class="page-link" href="<%=paginateUrl%>?page=<%= pageCount %><%= paginateVariable %>">&raquo;</a></li> -->
+                  <% } %>
+            </ul>
+    </div>
+  <% } %>

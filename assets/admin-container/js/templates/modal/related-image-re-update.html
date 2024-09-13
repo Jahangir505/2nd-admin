@@ -1,0 +1,52 @@
+
+
+
+<div class="modal-content">
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Are you going to edit ID <span style="font-size: 20px; font-weight: 400; color: red">{{imageId}}</span></h3>
+</div>
+<!--<div class="modal-body" id="modal-body">-->
+  <!--<b>Selected Event ID:</b> <span style="font-size: 20px; font-weight: 400; color: red">{{eventId}}</span><br/>-->
+<!--</div>-->
+  <div style="font-size: 15px; font-weight: 400; color: red" class="modal-body" id="modal-body" >
+
+    <form class="form-vertical ng-pristine ng-valid" role="form" data-parsley-validate="true" name="demo-form" action='/admin/product/re-update-related-image/' method="POST" enctype="multipart/form-data" novalidate="">
+      <div class="form-row">
+        <div class="col-lg-2 col-md-6 col-sm-12 col-12">
+          <div class="col">
+            <label for="image_sort">Sort</label>
+            <input type="number" id="image_sort" class="form-control form-control-sm" name="image_sort" id="sort" placeholder="0" ng-model="imageSort" ng-init="imageSort=imageSort" />
+<!--            <input type="text" id="productId" class="form-control form-control-sm" name="productId" id="productId" placeholder="0" ng-model="productId" ng-init="productId" />-->
+            <input type="hidden" id="productId" class="form-control form-control-sm" name="productId" id="productId" placeholder="0" value="{{productId}}" />
+            <input type="hidden" id="imageId" class="form-control form-control-sm" name="imageId" id="imageId" placeholder="0" value="{{imageId}}" />
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 col-sm-12 col-12">
+          <label class="col-form-label" for="is_video">.</label>
+          <div class="custom-control custom-checkbox mb-1">
+            <input type="checkbox" class="custom-control-input" name="is_video" id="is_video" ng-model="isVideo"  ng-checked="isVideo" />
+            <label class="custom-control-label" for="is_video">is-video</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="submitBtn">.</label><br>
+          <button id="submitBtn"  type="submit" class="btn btn-sm btn-inverse btn-secondary"> Submit </button>
+        </div>
+      </div>
+    </form>
+
+
+
+
+
+  </div>
+
+
+<div class="modal-footer">
+  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-success" type="button" ng-click="okDataCollectorReadIt()">Read</button>
+
+</div>
+</div>

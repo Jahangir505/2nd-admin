@@ -1,0 +1,11 @@
+<div ng-include autoscroll src="'/templates/partials/_header.html'"></div>
+<!--<div class="site__body">-->
+  <ui-view >
+    <!--=========Loader Start=============-->
+    <section ng-show="loaderPg" style=" " class="mod model-1">
+      <div class="spinner"></div>
+    </section>
+    <!--=========Loader End===============-->
+  </ui-view>
+<!--</div>-->
+<div ng-include  src="'/templates/partials/_footer.html'"></div>

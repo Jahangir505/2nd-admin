@@ -1,0 +1,573 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'rolePermission'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active"><%= title %></li>
+        <li class="breadcrumb-item"><a href="/admin/user/index"><%= title %>s</a></li>
+        <li class="breadcrumb-item active">Edit</li>
+    </ol>
+    <h1 class="page-header">Edit <small><%= title %></small></h1>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Details of the permissions For <%= data.role_name %></h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <div class="panel-body p-0">
+                    <form class="needs-validation" name="demo-form" action=<%= formActionTarget %> method="POST" enctype="multipart/form-data" novalidate>
+                        <div class="table-responsive" id="table">
+                            <table class="table table-bordered table-thead-sticky table-tfoot-sticky table-tbody-bordered table-px-10px table-py-4px table-sm table-striped text-nowrap mb-0">
+                                <thead>
+                                <tr>
+                                    <th>Module</th>
+                                    <th>Sub Module</th>
+                                    <th><i class="fa fa-pencil"></i></th>
+                                    <th><i class="fa fa-times fw-bold"></i></th>
+                                    <th><i class="fa fa-eye"></i></th>
+                                    <th><i class="fa fa-download"></i></th>
+                                    <th><i class="fa fa-sitemap"></i></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="5"><strong> Admin Ads Data</strong></td>
+                                    <td>Categories</td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_category_index) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_category_index" value="1" id="prv_adminAdsData_category_index" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_category_index" value="0" id="prv_adminAdsData_category_index"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_category_create) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_category_create" value="1" id="prv_adminAdsData_category_create" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_category_create" value="0" id="prv_adminAdsData_category_create"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_category_update) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_category_update" value="1" id="prv_adminAdsData_category_update" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_category_update" value="0" id="prv_adminAdsData_category_update"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_category_view) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_category_view" value="1" id="prv_adminAdsData_category_view" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_category_view" value="0" id="prv_adminAdsData_category_view"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_category_delete) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_category_delete" value="1" id="prv_adminAdsData_category_delete" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_category_delete" value="0" id="prv_adminAdsData_category_delete"/>
+                                        <% } %>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Sub Categories</td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_subCategory_index) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_subCategory_index" value="1" id="prv_adminAdsData_subCategory_index" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_subCategory_index" value="0" id="prv_adminAdsData_subCategory_index"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_subCategory_create) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_subCategory_create" value="1" id="prv_adminAdsData_subCategory_create" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_subCategory_create" value="0" id="prv_adminAdsData_subCategory_create"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_subCategory_update) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_subCategory_update" value="1" id="prv_adminAdsData_subCategory_update" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_subCategory_update" value="0" id="prv_adminAdsData_subCategory_update"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_subCategory_view) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_subCategory_view" value="1" id="prv_adminAdsData_subCategory_view" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_subCategory_view" value="0" id="prv_adminAdsData_subCategory_view"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_subCategory_delete) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_subCategory_delete" value="1" id="prv_adminAdsData_subCategory_delete" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_subCategory_delete" value="0" id="prv_adminAdsData_subCategory_delete"/>
+                                        <% } %>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>Amenities</td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_amenity_index) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_amenity_index" value="1" id="prv_adminAdsData_amenity_index" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_amenity_index" value="0" id="prv_adminAdsData_amenity_index"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_amenity_create) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_amenity_create" value="1" id="prv_adminAdsData_amenity_create" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_amenity_create" value="0" id="prv_adminAdsData_amenity_create"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_amenity_update) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_amenity_update" value="1" id="prv_adminAdsData_amenity_update" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_amenity_update" value="0" id="prv_adminAdsData_amenity_update"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_amenity_view) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_amenity_view" value="1" id="prv_adminAdsData_amenity_view" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_amenity_view" value="0" id="prv_adminAdsData_amenity_view"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_amenity_delete) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_amenity_delete" value="1" id="prv_adminAdsData_amenity_delete" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_amenity_delete" value="0" id="prv_adminAdsData_amenity_delete"/>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_country_index) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_country_index" value="1" id="prv_adminAdsData_country_index" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_country_index" value="0" id="prv_adminAdsData_country_index"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_country_create) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_country_create" value="1" id="prv_adminAdsData_country_create" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_country_create" value="0" id="prv_adminAdsData_country_create"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_country_update) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_country_update" value="1" id="prv_adminAdsData_country_update" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_country_update" value="0" id="prv_adminAdsData_country_update"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_country_view) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_country_view" value="1" id="prv_adminAdsData_country_view" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_country_view" value="0" id="prv_adminAdsData_country_view"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_country_delete) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_country_delete" value="1" id="prv_adminAdsData_country_delete" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_country_delete" value="0" id="prv_adminAdsData_country_delete"/>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>State</td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_state_index) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_state_index" value="1" id="prv_adminAdsData_state_index" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_state_index" value="0" id="prv_adminAdsData_state_index"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_state_create) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_state_create" value="1" id="prv_adminAdsData_state_create" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_state_create" value="0" id="prv_adminAdsData_state_create"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_state_update) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_state_update" value="1" id="prv_adminAdsData_state_update" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_state_update" value="0" id="prv_adminAdsData_state_update"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_state_view) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_state_view" value="1" id="prv_adminAdsData_state_view" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_state_view" value="0" id="prv_adminAdsData_state_view"/>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <% if (data.prv_adminAdsData_state_delete) { %>
+                                            <input type="checkbox"  name="prv_adminAdsData_state_delete" value="1" id="prv_adminAdsData_state_delete" checked/>
+                                        <% } else { %>
+                                            <input type="checkbox" name="prv_adminAdsData_state_delete" value="0" id="prv_adminAdsData_state_delete"/>
+                                        <% } %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Advertisements</strong></td>
+                                    <td>Ads</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Review & Comments</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="5"><strong> Emails</strong></td>
+                                    <td>Inbox</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Important</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Sent</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Draft</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Trash</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Chats</strong></td>
+                                    <td>Customers</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Businesses</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="1"><strong> Pages</strong></td>
+                                    <td>All Pages</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Testimonials</strong></td>
+                                    <td>Customers</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Businesses</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="1"><strong> FAQs</strong></td>
+                                    <td>All FAQs</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <!-- Engineering -->
+                                <tr>
+                                    <td rowspan="1"><strong> Press</strong></td>
+                                    <td>All Press</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Admin Events</strong></td>
+                                    <td>All Events</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Categories</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Business Events</strong></td>
+                                    <td>All Events</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Categories</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3"><strong> Blogs</strong></td>
+                                    <td>All Blogs</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Categories</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Blog Comments</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Careers</strong></td>
+                                    <td>All Jobs</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Applications</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3"><strong> Supports</strong></td>
+                                    <td>Customer Tickets</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Businesses Tickets</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Ticket Types</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4"><strong> Newsletters</strong></td>
+                                    <td>Overview</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>All Newsletters</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Groups</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Subscribers</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4"><strong> Users</strong></td>
+                                    <td>Customers</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Businesses</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Authors</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Role & Permissions</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong> Help Center</strong></td>
+                                    <td>All Topics</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Categories</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3"><strong> Logs</strong></td>
+                                    <td>Error Logs</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Login Audits</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                <tr>
+                                    <td>Activities</td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                                <button class="btn btn-md btn-dark me-3 mb-3" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- END #content -->

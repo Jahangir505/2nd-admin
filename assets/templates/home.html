@@ -1,0 +1,275 @@
+
+<div class="site__body">
+<div class="block-slideshow block-slideshow--layout--with-departments block">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 d-none d-lg-block"></div>
+      <div class="col-12 col-lg-9">
+        <div class="block-slideshow__body" style="position: relative;" ng-init="initHomepageContent()">
+          <!--=========Loader Start=============-->
+          <section ng-show="glryLdr" style="height: 100% !important; z-index: 45 !important;; " class="mod model-1">
+            <div class="spinner"></div>
+          </section>
+          <!--=========Loader End===============-->
+          <div class="owl-carousel" >
+
+            <a class="block-slideshow__slide" href="#" ng-repeat="singleGalImg in imgGallery track by $index" ng-init="$last && finishedHomeMainGalleryLoad()">
+              <div class="block-slideshow__slide-image block-slideshow__slide-image--desktop"
+                   style="background-image: url('uploads/image-gallery/{{singleGalImg.image}}');"></div>
+              <div class="block-slideshow__slide-image block-slideshow__slide-image--mobile"
+                   style="background-image: url('uploads/image-gallery/{{singleGalImg.image}}')"></div>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="block block-features block-features--layout--classic">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-6">
+        <img ng-src="images/b-1.jpg" class="img-responsive">
+        <div class="clearfix">&nbsp;</div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-6">
+        <img ng-src="images/b-1.jpg" class="img-responsive">
+        <div class="clearfix">&nbsp;</div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-6">
+        <img ng-src="images/b-1.jpg" class="img-responsive">
+        <div class="clearfix">&nbsp;</div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-6">
+        <img ng-src="images/b-1.jpg" class="img-responsive">
+        <div class="clearfix">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="block block-features block-features--layout--classic">
+  <div class="container">
+    <div class="block-features__list">
+      <div class="block-features__item">
+        <div class="block-features__icon">
+          <svg width="48px" height="48px">
+            <use xlink:href="images/sprite.svg#fi-free-delivery-48"></use>
+          </svg>
+        </div>
+        <div class="block-features__content">
+          <div class="block-features__title">Free Shipping</div>
+          <div class="block-features__subtitle">For orders from $50</div>
+        </div>
+      </div>
+      <div class="block-features__divider"></div>
+      <div class="block-features__item">
+        <div class="block-features__icon">
+          <svg width="48px" height="48px">
+            <use xlink:href="images/sprite.svg#fi-24-hours-48"></use>
+          </svg>
+        </div>
+        <div class="block-features__content">
+          <div class="block-features__title">Support 24/7</div>
+          <div class="block-features__subtitle">Call us anytime</div>
+        </div>
+      </div>
+      <div class="block-features__divider"></div>
+      <div class="block-features__item">
+        <div class="block-features__icon">
+          <svg width="48px" height="48px">
+            <use xlink:href="images/sprite.svg#fi-payment-security-48"></use>
+          </svg>
+        </div>
+        <div class="block-features__content">
+          <div class="block-features__title">100% Safety</div>
+          <div class="block-features__subtitle">Only secure payments</div>
+        </div>
+      </div>
+      <div class="block-features__divider"></div>
+      <div class="block-features__item">
+        <div class="block-features__icon">
+          <svg width="48px" height="48px">
+            <use xlink:href="images/sprite.svg#fi-tag-48"></use>
+          </svg>
+        </div>
+        <div class="block-features__content">
+          <div class="block-features__title">Hot Offers</div>
+          <div class="block-features__subtitle">Discounts up to 90%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--===============All Featered Start=============-->
+<!--  <div class="block block-products" data-layout="grid-4" data-mobile-grid-columns="2">-->
+<!--    <div class="container">-->
+<!--      <div class="block-header"><h3 class="block-header__title">Featured Products</h3>-->
+<!--        <div class="block-header__divider"></div>-->
+<!--      </div>-->
+
+<!--      <div class="block-products__body" ng-if="allFetrdProduct.length > 0" style="position: relative">-->
+<!--        &lt;!&ndash;=========Loader Start=============&ndash;&gt;-->
+<!--        <section ng-show="forCartLodr" style="height: 100% !important; z-index: 45 !important;padding-top: 0px !important;top: inherit" class="mod model-1">-->
+<!--          <div class="spinner"></div>-->
+<!--        </section>-->
+<!--        &lt;!&ndash;=========Loader End===============&ndash;&gt;-->
+
+<!--        <div class="block-products__list">-->
+<!--          <div class="block-products__list-item" ng-repeat="sinFetPro in allFetrdProduct track by $index">-->
+<!--            <div class="product-card product-card&#45;&#45;hidden-actions">-->
+<!--              <button class="product-card__quickview" type="button">-->
+<!--                <svg width="16px" height="16px">-->
+<!--                  <use xlink:href="images/sprite.svg#quickview-16"></use>-->
+<!--                </svg>-->
+<!--                <span class="fake-svg-icon"></span></button>-->
+<!--              &lt;!&ndash;            ====================If Else Start===============&ndash;&gt;-->
+<!--              <div class="product-card__badges-list" >-->
+<!--                <div class="product-card__badge product-card__badge&#45;&#45;new" ng-if="sinFetPro.is_latest">New</div>-->
+<!--                <div class="product-card__badge product-card__badge&#45;&#45;sale" ng-else-if="sinFetPro.is_clearance">Sale</div>-->
+<!--                <div class="product-card__badge product-card__badge&#45;&#45;hot" ng-else-if="sinFetPro.is_hot">Hot</div>-->
+<!--              </div>-->
+<!--              &lt;!&ndash;            ====================If Else End=================&ndash;&gt;-->
+
+
+<!--              <div class="product-card__image product-image">-->
+<!--                <a ui-sref="product-show({productSlug: sinFetPro.slug})"  class="product-image__body">-->
+<!--                  <img class="product-image__img" ng-src="uploads/product-image/{{sinFetPro.featured_image}}" alt="">-->
+<!--                </a>-->
+<!--              </div>-->
+<!--              <div class="product-card__info">-->
+<!--                <div class="product-card__name"><a ui-sref="product-show({productSlug: sinFetPro.slug})"> {{sinFetPro.name}}</a></div>-->
+<!--                &lt;!&ndash;              <ul class="product-card__features-list">&ndash;&gt;-->
+<!--                &lt;!&ndash;                <li>Speed: 750 RPM</li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <li>Power Source: Cordless-Electric</li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <li>Battery Cell Type: Lithium</li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <li>Voltage: 20 Volts</li>&ndash;&gt;-->
+<!--                &lt;!&ndash;                <li>Battery Capacity: 2 Ah</li>&ndash;&gt;-->
+<!--                &lt;!&ndash;              </ul>&ndash;&gt;-->
+<!--              </div>-->
+<!--              <div class="product-card__actions">-->
+<!--                &lt;!&ndash;              <div class="product-card__availability">Availability: <span&ndash;&gt;-->
+<!--                &lt;!&ndash;                class="text-success">In Stock</span>&ndash;&gt;-->
+<!--                &lt;!&ndash;              </div>&ndash;&gt;-->
+<!--                <div class="product-card__prices" ng-if="sinFetPro.is_clearance">-->
+<!--                  <span class="product-card__new-price">{{sinFetPro.clearance_price | number : 2}} BDT</span>-->
+<!--                  <span class="product-card__old-price">{{sinFetPro.base_price | number : 2}} BDT</span>-->
+<!--                </div>-->
+<!--                <div class="product-card__prices" ng-if="!sinFetPro.is_clearance">-->
+<!--                  {{sinFetPro.base_price | number : 2}} BDT-->
+<!--                </div>-->
+<!--                <div class="product-card__buttons">-->
+<!--                  <button class="btn btn-primary product-card__addtocart" type="button" ng-click="addToCartProduct($event, sinFetPro.id)">Add To Cart </button>-->
+<!--                  <button class="btn btn-secondary product-card__addtocart product-card__addtocart&#45;&#45;list" type="button" ng-click="addToCartProduct($event, sinFetPro.id)">Add To Cart</button>-->
+<!--                  <button class="btn btn-light btn-svg-icon btn-svg-icon&#45;&#45;fake-svg product-card__wishlist" type="button">-->
+<!--                    <svg width="16px" height="16px">-->
+<!--                      <use xlink:href="images/sprite.svg#wishlist-16"></use>-->
+<!--                    </svg>-->
+<!--                    <span class="fake-svg-icon fake-svg-icon&#45;&#45;wishlist-16"></span>-->
+<!--                  </button>-->
+<!--                  <button class="btn btn-light btn-svg-icon btn-svg-icon&#45;&#45;fake-svg product-card__compare" type="button">-->
+<!--                    <svg width="16px" height="16px">-->
+<!--                      <use xlink:href="images/sprite.svg#compare-16"></use>-->
+<!--                    </svg>-->
+<!--                    <span class="fake-svg-icon fake-svg-icon&#45;&#45;compare-16"></span>-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--===============All Featered End===============-->
+
+
+
+
+
+<div class="block block-products" data-layout="grid-4" data-mobile-grid-columns="2" ng-repeat="sinCatCont in allCatForContent track by $index">
+  <div class="container" ng-if="sinCatCont.catProductArrList.length > 0">
+    <div class="block-header"><h3 class="block-header__title">{{sinCatCont.name}}</h3>
+      <div class="block-header__divider"></div>
+    </div>
+    <div class="block-products__body"  style="position: relative">
+      <!--=========Loader Start=============-->
+      <section ng-show="forCartLodr" style="height: 100% !important; z-index: 45 !important;padding-top: 0px !important;top: inherit" class="mod model-1">
+        <div class="spinner"></div>
+      </section>
+      <!--=========Loader End===============-->
+      <div class="block-products__list">
+        <div class="block-products__list-item" ng-repeat="sinConProd in sinCatCont.catProductArrList track by $index">
+          <div class="product-card product-card--hidden-actions">
+            <button class="product-card__quickview" type="button">
+              <svg width="16px" height="16px">
+                <use xlink:href="images/sprite.svg#quickview-16"></use>
+              </svg>
+              <span class="fake-svg-icon"></span></button>
+            <!--            ====================If Else Start===============-->
+            <div class="product-card__badges-list" >
+              <div class="product-card__badge product-card__badge--new" ng-if="sinConProd.is_latest">New</div>
+              <div class="product-card__badge product-card__badge--sale" ng-if="sinConProd.is_clearance">Sale</div>
+
+              <div class="product-card__badge product-card__badge--hot" ng-if="sinConProd.is_hot">Hot</div>
+            </div>
+            <!--            ====================If Else End=================-->
+
+
+            <div class="product-card__image product-image">
+              <a ui-sref="product-show({productSlug: sinConProd.slug})" class="product-image__body">
+                <img class="product-image__img" ng-src="uploads/product-image/{{sinConProd.featured_image}}" alt="">
+              </a>
+            </div>
+            <div class="product-card__info">
+              <div class="product-card__name"><a ui-sref="product-show({productSlug: sinConProd.slug})"> {{sinConProd.name}}</a></div>
+              <!--              <ul class="product-card__features-list">-->
+              <!--                <li>Speed: 750 RPM</li>-->
+              <!--                <li>Power Source: Cordless-Electric</li>-->
+              <!--                <li>Battery Cell Type: Lithium</li>-->
+              <!--                <li>Voltage: 20 Volts</li>-->
+              <!--                <li>Battery Capacity: 2 Ah</li>-->
+              <!--              </ul>-->
+            </div>
+            <div class="product-card__actions">
+              <!--              <div class="product-card__availability">Availability: <span-->
+              <!--                class="text-success">In Stock</span>-->
+              <!--              </div>-->
+              <div class="product-card__prices" ng-if="sinConProd.is_clearance">
+                <span class="product-card__new-price">{{sinConProd.clearance_price | number : 2}} BDT</span>
+                <span class="product-card__old-price">{{sinConProd.base_price | number : 2}} BDT</span>
+              </div>
+              <div class="product-card__prices" ng-if="!sinConProd.is_clearance">
+                {{sinConProd.base_price | number : 2}} BDT
+              </div>
+              <div class="product-card__buttons">
+                <button class="btn btn-primary product-card__addtocart" type="button" ng-click="addToCartProduct($event, sinConProd.id)">Add To Cart </button>
+                <button class="btn btn-secondary product-card__addtocart product-card__addtocart--list" type="button" ng-click="addToCartProduct($event, sinConProd.id)">Add To Cart</button>
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__wishlist" type="button">
+                  <svg width="16px" height="16px">
+                    <use xlink:href="images/sprite.svg#wishlist-16"></use>
+                  </svg>
+                  <span class="fake-svg-icon fake-svg-icon--wishlist-16"></span>
+                </button>
+                <button class="btn btn-light btn-svg-icon btn-svg-icon--fake-svg product-card__compare" type="button">
+                  <svg width="16px" height="16px">
+                    <use xlink:href="images/sprite.svg#compare-16"></use>
+                  </svg>
+                  <span class="fake-svg-icon fake-svg-icon--compare-16"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+

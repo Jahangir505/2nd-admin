@@ -1,0 +1,136 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'page'}) %>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <!-- BEGIN breadcrumb -->
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Events</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index">All Events</a></li>
+        <li class="breadcrumb-item active"><%= data.title %> </li>
+    </ol>
+    <!-- END breadcrumb -->
+    <!-- BEGIN page-header -->
+    <h1 class="page-header"><%= data.title %>  <small>Events</small></h1>
+    <!-- END page-header -->
+    <!-- BEGIN row -->
+    <div class="row">
+        <!-- BEGIN col-10 -->
+        <div class="col-xl-5">
+            <!-- BEGIN panel -->
+            <div class="panel panel-inverse">
+                <!-- BEGIN panel-heading -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Detail of <%= title %> </h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <!-- END panel-heading -->
+                <!-- BEGIN panel-body -->
+                <div class="panel-body p-0 custom-sniper-container">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Information</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><strong>Title</strong></td>
+                                <td><%= data.title %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Category</strong></td>
+                                <td><%= data.siteEventCategory ? data.siteEventCategory.name : '' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Form Date Time</strong></td>
+                                <td><%= data.start_date_time ? moment(data.start_date_time).format('DD-MMM-YYYY hh:mm A') : 'Not Set yet' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>End Date Time</strong></td>
+                                <td><%= data.end_date_time ? moment(data.end_date_time).format('DD-MMM-YYYY hh:mm A') : 'Not Set yet' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Picture</strong></td>
+                                <td ng-controller="commonActionController">
+                                    <a href="#"  ng-click="clickMeForShowImage($event, '/uploads/site-event/<%= data.image %>', '')">
+                                        <img src="/uploads/site-event/<%= data.image %>" class="rounded h-25px my-n1 mx-n1" />
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Venue Name</strong></td>
+                                <td><%= data.venue_name %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ticket Price</strong></td>
+                                <td><%= data.ticket_price %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Address</strong></td>
+                                <td><%= data.address %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone No</strong></td>
+                                <td><%= data.phone_no %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Stale</strong></td>
+                                <td><%= data.state ? data.state.name : '' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>City</strong></td>
+                                <td><%= data.city %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Website</strong></td>
+                                <td><%= data.website %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Zip Code</strong></td>
+                                <td><%= data.zip_code %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Details</strong></td>
+                                <td><%= data.details %></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Visit</strong></td>
+                                <td><%= data.view %></td>
+                            </tr>
+
+                            <tr>
+                                <td><strong>Status</strong></td>
+                                <td>
+                                    <% if (data.status == 1) { %>
+                                        <span class="running">Active</span>
+                                    <% } %>
+                                    <% if (data.status == 2) { %>
+                                        <span class="running">Inactive</span>
+                                    <% } %>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Created</strong></td>
+                                <td><%= data.createdAt ? moment(data.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Updated</strong></td>
+                                <td><%= data.updatedAt ? moment(data.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END panel-body -->
+            </div>
+            <!-- END panel -->
+        </div>
+        <!-- END col-10 -->
+    </div>
+    <!-- END row -->
+</div>
+<!-- END #content -->

@@ -1,0 +1,113 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'backenduser'}) %>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <!-- BEGIN breadcrumb -->
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index">Backend Users</a></li>
+        <li class="breadcrumb-item active"><%= data.first_name %> <%= data.last_name %></li>
+    </ol>
+    <!-- END breadcrumb -->
+    <!-- BEGIN page-header -->
+    <h1 class="page-header"><%= data.first_name %> <%= data.last_name %> <small>Backend Users</small></h1>
+    <!-- END page-header -->
+    <!-- BEGIN row -->
+    <div class="row">
+        <!-- BEGIN col-10 -->
+        <div class="col-xl-3">
+            <!-- BEGIN panel -->
+            <div class="panel panel-inverse">
+                <!-- BEGIN panel-heading -->
+                <div class="panel-heading">
+                    <h4 class="panel-title">Detail of <%= title %> </h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <!-- END panel-heading -->
+                <!-- BEGIN panel-body -->
+                <div class="panel-body p-0 custom-sniper-container">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Information</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td><strong>First Name</strong></td>
+                                <td><%= data.first_name %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Last Name</strong></td>
+                                <td><%= data.last_name %></td>
+                            </tr>
+                            
+                            <!-- <tr>
+                                <td><strong>User Name</strong></td>
+                                <td><%= data.username %></td>
+                            </tr> -->
+                            <tr>
+                                <td><strong>Role</strong></td>
+                                <td><%= data.rolePermission ? data.rolePermission.role_name : 'not yet' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Email</strong></td>
+                                <td><%= data.email %></td>
+                            </tr>
+                            <!-- <tr>
+                                <td><strong>Mobile</strong></td>
+                                <td><%= data.mobile_no %></td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td><strong>Street Address</strong></td>
+                                <td><%= data.street_address %></td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td><strong>City</strong></td>
+                                <td><%= data.city %></td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td><strong>Zip</strong></td>
+                                <td><%= data.zip %></td>
+                            </tr> -->
+                            <!-- <tr>
+                                <td><strong>State</strong></td>
+                                <td><%= data.state ? data.state.name : 'Not set' %></td>
+                            </tr> -->
+                            <tr>
+                                <td><strong>Status</strong></td>
+                                <td>
+                                    <% if (data.status == 1) { %>
+                                        <span class="running">Active</span>
+                                    <% } %>
+                                    <% if (data.status == 2) { %>
+                                        <span class="running">Inactive</span>
+                                    <% } %>
+                                    <% if (data.status == 3) { %>
+                                        <span class="running">Pending</span>
+                                    <% } %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Created</strong></td>
+                                <td><%= data.createdAt ? moment(data.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Updated</strong></td>
+                                <td><%= data.updatedAt ? moment(data.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- END panel-body -->
+            </div>
+            <!-- END panel -->
+        </div>
+        <!-- END col-10 -->
+    </div>
+    <!-- END row -->
+</div>
+<!-- END #content -->

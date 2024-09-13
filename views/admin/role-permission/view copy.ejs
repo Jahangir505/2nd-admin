@@ -1,0 +1,99 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'add-user'}) %>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <!-- BEGIN breadcrumb -->
+    <ol class="breadcrumb float-xl-end">
+       <li class="breadcrumb-item"><a href="admin/dashboard">Home</a></li>
+       <li class="breadcrumb-item"><a href="admin/user/index">Users</a></li>
+       <li class="breadcrumb-item active"><%= data.first_name %> <%= data.last_name %></li>
+    </ol>
+    <!-- END breadcrumb -->
+    <!-- BEGIN page-header -->
+    <h1 class="page-header"><%= data.first_name %> <%= data.last_name %></h1>
+    <!-- END page-header -->
+    <!-- BEGIN row -->
+    <div class="row">
+       <!-- BEGIN col-10 -->
+       <div class="col-xl-5">
+          <!-- BEGIN panel -->
+          <div class="panel panel-inverse">
+             <!-- BEGIN panel-heading -->
+             <div class="panel-heading">
+                <h4 class="panel-title">Detail of <%= title %> </h4>
+                <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+             </div>
+             <!-- END panel-heading -->
+             <!-- BEGIN panel-body -->
+             <div class="panel-body p-0 custom-sniper-container">
+                    <div class="table-responsive">
+                       <table class="table table-striped mb-0">
+                          <thead>
+                             <tr>
+                                <th>Subject</th>
+                                <th>Information</th>
+                             </tr>
+                          </thead>
+                          <tbody>
+                             <tr>
+                                <td><strong>First Name</strong></td>
+                                <td><%= data.first_name %></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Last Name</strong></td>
+                                <td><%= data.last_name %></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Nickname</strong></td>
+                                <td><%= data.nickname %></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Image</strong></td>
+                                <td><img src="/uploads/user-image/<%= data.image %>" class="rounded h-20px my-n1 mx-n1 mw-100 rounded-pill" /></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Mobile</strong></td>
+                                <td><%= data.mobile_no %></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Email</strong></td>
+                                <td><%= data.email %></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Role</strong></td>
+                                <td>
+                                    <%= (data.user_role == 1) ? 'Admin' : '' %>
+                                    <%= (data.user_role == 2) ? 'Employer' : '' %>
+                                    <%= (data.user_role == 3) ? 'Employee' : '' %>
+                                    <%= (data.user_role == 4) ? 'Customer' : '' %>
+                                </td>
+                             </tr>
+                             <tr>
+                                <td><strong>Status</strong></td>
+                                <td>
+                                    <%= (data.status == 1) ? 'Active' : '' %>
+                                    <%= (data.status == 2) ? 'Inactive' : '' %>
+                                    <%= (data.status == 3) ? 'Pending' : '' %>
+                                    <%= (data.status == 4) ? 'Suspend' : '' %>
+                                </td>
+                             </tr>
+                             <tr>
+                                <td><strong>Created</strong></td>
+                                <td><%= data.createdAt ? moment(data.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                             </tr>
+                             <tr>
+                                <td><strong>Updated</strong></td>
+                                <td><%= data.updatedAt ? moment(data.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                             </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                 </div>
+             <!-- END panel-body -->
+          </div>
+          <!-- END panel -->
+       </div>
+       <!-- END col-10 -->
+    </div>
+    <!-- END row -->
+ </div>
+ <!-- END #content -->

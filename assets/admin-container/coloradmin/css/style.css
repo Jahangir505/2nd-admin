@@ -1,0 +1,136 @@
+.star{
+    color: red!important;
+    font-weight:bold;
+}
+
+.select2-search--dropdown{
+    display: none!important;
+}
+
+.modal .modal-header {
+    background: #222222 !important;
+}
+
+.close {
+    color: white !important;
+    border:none;
+    background:none;
+}
+
+.modal .modal-header {
+    padding: 10px 15px;
+    border: none;
+    background: #1d2226;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-border-top-left-radius: 3px;
+    border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.modal .modal-header .modal-title {
+    line-height: 20px;
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: inherit;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    color: white;
+}
+
+.parsley-error{
+    color: #000!important;
+}
+
+form {
+    display: contents!important;
+}
+
+.search-icon{
+    line-height:normal;
+}
+
+.note-editor.note-frame .note-editing-area{
+    border-left: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+}
+.form-control-lg{
+    background: #f5f5f7;
+}
+.form-select-lg{
+    background: #f5f5f7;
+}
+.theme-panel .theme-collapse-btn{
+    padding-top: 6px!important;
+}
+.app-sidebar .menu .menu-profile .menu-profile-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-image: url("../../assets/img/cover-sidebar-user.jpg"); */
+    background-image: url("../img/cover-sidebar-user.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.alert_message{
+  padding: 0;
+  position: absolute!important;
+  z-index: 99999;
+  text-align: center;
+  width: 30%;
+  left: 36%;
+}
+.alert_message ul li{
+  list-style-type: none;
+  margin-bottom: 5px;
+}
+.sweet-alert{
+  background: #fffaf0;
+}
+.pulseWarning{
+  display: none!important;
+}
+.sweet-alert .sa-icon.sa-error{
+  display: none;
+}
+.sweet-overlay{
+  background-color: rgba(0, 0, 0, 0.7)!important;
+}
+.sweet-alert{
+  top: 35%!important;
+}
+.sweet-alert h2{
+  margin: 10px 0;
+  font-size: 28px;
+}
+.sweet-alert .sa-icon{
+  width: 60px;
+  height: 60px;
+}
+.sweet-alert .sa-icon.sa-error .sa-line{
+  width: 28px!important;
+  top: 30px;
+}
+.sweet-alert button{
+  padding: 7px 20px!important;
+  font-size: 14px;
+}
+.sweet-alert button.cancel{
+  background: #ced4da!important;
+  color: black;
+}

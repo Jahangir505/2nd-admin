@@ -1,0 +1,206 @@
+<!-- begin #sidebar -->
+<div id="sidebar" class="sidebar">
+    <!-- begin sidebar scrollbar -->
+    <% if(req.isAuthenticated()){ %>
+    <div data-scrollbar="true" data-height="100%">
+        <!-- begin sidebar user -->
+        <ul class="nav">
+            <li class="nav-profile">
+                <a href="javascript:;" data-toggle="nav-profile">
+                    <div class="cover with-shadow"></div>
+<!--                    <div class="image">-->
+<!--&lt;!&ndash;                        <img src="/admin-container/coloradmin/img/user.jpg" alt="" />&ndash;&gt;-->
+<!--&lt;!&ndash;                        <i class="fas fa-user"></i>&ndash;&gt;-->
+<!--                    </div>-->
+                    <div class="info">
+                        <b class="caret pull-right"></b><%=req.user.email%>
+                        <% if(req.user.is_superadmin){ %>
+                        <small>Superadmin</small>
+                        <% } %>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <ul class="nav nav-profile">
+                    <li><a href="javascript:;"><i class="fa fa-cog"></i> Settings</a></li>
+                    <li><a href="javascript:;"><i class="fa fa-pencil-alt"></i> Send Feedback</a></li>
+                    <li><a href="javascript:;"><i class="fa fa-question-circle"></i> Helps</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- end sidebar user -->
+        <!-- begin sidebar nav -->
+        <ul class="nav"><li class="nav-header">Navigation</li>
+
+            <li class="<%= (selmenu=='dashboard')? 'active': '' %>">
+                <a href="/admin/dashboard">
+                    <i class="fa fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <% if(req.user.user_role == 1){ %>
+            <li style="display: none1;" class="<%= (selmenu=='db-backup')? 'active': '' %>">
+                <a href="/admin/dbbackup/name">
+                    <i class="fa fa-th-large"></i>
+                    <span>DB Backup</span>
+                </a>
+            </li>
+
+            <li class="<%= (selmenu=='users')? 'active': '' %>">
+                <a href="/admin/user/index">
+                    <i class="fa fa-users"></i>
+                    <span>Users</span>
+                </a>
+            </li>
+
+            <li class="<%= (selmenu=='customer')? 'active': '' %>">
+                <a href="/admin/customer/index">
+                    <i class="fa fa-users"></i>
+                    <span>Customer</span>
+                </a>
+            </li>
+            <% } %>
+            
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="<%= (selmenu=='brand')? 'active': '' %>">
+                    <a href="/admin/brand/index">
+                        <i class="fa fa-list-ol"></i>
+                        <span>Brand</span>
+                    </a>
+                </li>
+            <% } %>
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+            <li class="has-sub <%= ((selmenu=='category') || (selmenu=='sub-category') || (selmenu=='sub-subcategory') || (selmenu=='menu-image'))? 'active': '' %>">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fa fa-list-ol"></i>
+                    <span>Category</span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<%= (selmenu=='category')? 'active': '' %>"><a href="/admin/category/index">Category</a></li>
+                    <li class="<%= (selmenu=='sub-category')? 'active': '' %>"><a href="/admin/subcategory/index">Sub-Category </a></li>
+                    <li class="<%= (selmenu=='sub-subcategory')? 'active': '' %>"><a href="/admin/sub-subcategory/index">Sub-Subcategory</a></li>
+                    <li class="<%= (selmenu=='menu-image')? 'active': '' %>"><a href="/admin/menu-image/index">Menu-image</a></li>
+                </ul>
+            </li>
+            <% } %>
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="has-sub <%= ((selmenu=='product-attribute') || (selmenu=='product-terms'))? 'active': '' %>">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-list-ol"></i>
+                        <span>Attributes</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="<%= (selmenu=='product-attribute')? 'active': '' %>"><a href="/admin/product-attribute/index">Attributes</a></li>
+                        <li class="<%= (selmenu=='product-terms')? 'active': '' %>"><a href="/admin/product-terms/index">Terms </a></li>
+                    </ul>
+                </li>
+            <% } %>
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="<%= (selmenu=='image-gallery')? 'active': '' %>">
+                    <a href="/admin/image-gallery/index">
+                        <i class="fa fa-images"></i>
+                        <span>Image-Gallery</span>
+                    </a>
+                </li>
+            <% } %>
+
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="has-sub <%= ((selmenu=='tag') || (selmenu=='filter-tag-group'))? 'active': '' %>">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-list-ol"></i>
+                        <span>Tag</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="<%= (selmenu=='tag')? 'active': '' %>"><a href="/admin/tag/index">Tag</a></li>
+                        <li class="<%= (selmenu=='filter-tag-group')? 'active': '' %>"><a href="/admin/filter-tag-group/index">Tag group </a></li>
+                    </ul>
+                </li>
+            <% } %>
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="has-sub <%= ((selmenu=='shippingcountry') || (selmenu=='region-charge') || (selmenu=='sub-region-charge') || (selmenu=='flat-rate'))? 'active': '' %>">
+                    <a href="javascript:;">
+                        <b class="caret"></b>
+                        <i class="fa fa-list-ol"></i>
+                        <span>Shipping Country</span>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="<%= (selmenu=='shippingcountry')? 'active': '' %>"><a href="/admin/shippingcountry/index">Country</a></li>
+                        <li class="<%= (selmenu=='region-charge')? 'active': '' %>"><a href="/admin/shippingcountry-region-charge">Region Charge</a></li>
+                        <li class="<%= (selmenu=='sub-region-charge')? 'active': '' %>"><a href="/admin/shippingcountry-sub-region-charge">Sub Region Charge</a></li>
+                        <li class="<%= (selmenu=='flat-rate')? 'active': '' %>"><a href="/admin/shippingcountry-flat-rate">Flat Rate</a></li>
+                    </ul>
+                </li>
+            <% } %>
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="<%= (selmenu=='coupon')? 'active': '' %>">
+                    <a href="/admin/coupon/index">
+                        <i class="fa fa-list-ol"></i>
+                        <span>Coupon</span>
+                    </a>
+                </li>
+            <% } %>
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+            <li class="has-sub <%= ((selmenu=='product') ||(selmenu=='product-rating') || (selmenu=='special-product') || (selmenu=='clearence-product') || (selmenu=='featured-product') || (selmenu=='latest-product'))? 'active': '' %>">
+                <a href="javascript:;">
+                    <b class="caret"></b>
+                    <i class="fa fa-list-ol"></i>
+                    <span>Product</span>
+                </a>
+                <ul class="sub-menu">
+                    <li class="<%= (selmenu=='product')? 'active': '' %>"><a href="/admin/product/index">All Product</a></li>
+                    <li class="<%= (selmenu=='product')? 'active': '' %>"><a href="/admin/product/csv-download-sku-quantity">CSV Download</a></li>
+                    <!-- <li class="<%= (selmenu=='product')? 'active': '' %>"><a href="/admin/product/csv-upload-form">CSV Upload</a></li> -->
+                    <li class="<%= (selmenu=='product-rating')? 'active': '' %>"><a href="/admin/product-rating/index">Product-Rating</a></li>
+                </ul>
+            </li>
+            <% } %>
+
+            <% if(req.user.user_role == 1 || (req.user.user_role == 2)){ %>
+                <li class="<%= (selmenu=='order')? 'active': '' %>">
+                    <a href="/admin/order/index">
+                        <i class="fa fa-images"></i>
+                        <span>Order</span>
+                    </a>
+                </li>
+
+                <li class="<%= (selmenu=='subscriber')? 'active': '' %>">
+                    <a href="/admin/subscriber/index">
+                        <i class="fa fa-users-cog"></i>
+                        <span>Subscribe</span>
+                    </a>
+                </li>
+
+                <li class="<%= (selmenu=='report')? 'active': '' %>">
+                    <a href="/admin/report/index">
+                        <i class="fa fa-users-cog"></i>
+                        <span>Report</span>
+                    </a>
+                </li>
+            <% } %>
+
+            
+
+
+
+            
+
+            <!-- begin sidebar minify button -->
+            <li><a href="javascript:;" class="sidebar-minify-btn" data-click="sidebar-minify"><i class="fa fa-angle-double-left"></i></a></li>
+            <!-- end sidebar minify button -->
+        </ul>
+        <!-- end sidebar nav -->
+    </div>
+    <% } %>
+    <!-- end sidebar scrollbar -->
+</div>
+<div class="sidebar-bg"></div>
+<!-- end #sidebar -->

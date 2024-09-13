@@ -1,0 +1,69 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'blogCategory'}) %>
+<div id="content" class="app-content">
+    <!-- BEGIN breadcrumb -->
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Press</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index">Categories</a></li>
+        <li class="breadcrumb-item active"><%= data.name %></li>
+    </ol>
+    <!-- END breadcrumb -->
+    <h1 class="page-header"><%= data.name %> <small><%= submodule %></small></h1>
+    <!-- BEGIN row -->
+    <div class="row">
+       <!-- BEGIN col-10 -->
+       <div class="col-xl-3">
+          <!-- BEGIN panel -->
+          <div class="panel panel-inverse">
+             <!-- BEGIN panel-heading -->
+             <div class="panel-heading">
+                <h4 class="panel-title">Detail of Bangladesh </h4>
+                <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+             </div>
+             <!-- END panel-heading -->
+             <!-- BEGIN panel-body -->
+             <div class="panel-body p-0 custom-sniper-container">
+                    <div class="table-responsive">
+                       <table class="table table-striped mb-0">
+                          <thead>
+                             <tr>
+                                <th>Subject</th>
+                                <th>Information</th>
+                             </tr>
+                          </thead>
+                          <tbody>
+
+                             <tr>
+                              <td><strong><%= title %> Name</strong></td>
+                              <td><%= data.name %></td>
+                            </tr>
+                            <tr>
+                              <td><strong>Status</strong></td>
+                              <td><%= (data.status == 1) ? 'Active':'Inactive' %></td>
+                            </tr>
+                            <tr>
+                              <td><strong>Slug</strong></td>
+                              <td><%= data.slug %></td>
+                            </tr>
+
+                             <tr>
+                              <td><strong>Created</strong></td>
+                              <td><%= data.createdAt ? moment(data.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                           </tr>
+                           <tr>
+                              <td><strong>Updated</strong></td>
+                              <td><%= data.updatedAt ? moment(data.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                           </tr>
+                          </tbody>
+                       </table>
+                    </div>
+                 </div>
+             <!-- END panel-body -->
+          </div>
+          <!-- END panel -->
+       </div>
+       <!-- END col-10 -->
+    </div>
+    <!-- END row -->
+ </div>
+ <!-- END #content -->

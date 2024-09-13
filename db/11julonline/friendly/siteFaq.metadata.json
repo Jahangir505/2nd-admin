@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"slug":{"$numberInt":"1"}},"name":"slug_1","unique":true,"sparse":true}],"uuid":"66f37939adaf4ab6980f913d5c8bb0b3","collectionName":"siteFaq","type":"collection"}

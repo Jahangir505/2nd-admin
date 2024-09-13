@@ -1,0 +1,592 @@
+<div id="sidebar" class="app-sidebar" data-bs-theme="dark">
+   <div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+       <div class="menu">
+           <div class="menu-profile">
+               <a href="javascript:;" class="menu-profile-link" data-toggle="app-sidebar-profile" data-target="#appSidebarProfileMenu">
+                   <div class="menu-profile-cover with-shadow"></div>
+                   <div class="menu-profile-image">
+                       <img src="assets/img/user/user-13.jpg" alt="">
+                   </div>
+                   <div class="menu-profile-info">
+                       <div class="d-flex align-items-center">
+                           <div class="flex-grow-1">
+                              <%=req.user.email%>
+                           </div>
+                           <div class="menu-caret ms-auto"></div>
+                       </div>
+                       <small>
+                          <% if(req.user.user_role == 1){ %>
+                           Superadmin
+                           <% } else if(req.user.user_role == 2) { %>
+                              Admin
+                              <% } else if(req.user.user_role == 3) { %>
+                                 Manager
+                           <% }%>
+                     </small>
+                   </div>
+               </a>
+           </div>
+           <div id="appSidebarProfileMenu" class="collapse">
+               <div class="menu-item pt-5px">
+                   <a href="edit-profile.php" class="menu-link">
+                       <div class="menu-icon"><i class="fa fa-pencil"></i></div>
+                       <div class="menu-text">Edit Profile</div>
+                   </a>
+               </div>
+               <div class="menu-item">
+                   <a href="email-inbox.php" class="menu-link">
+                       <div class="menu-icon"><i class="fa fa-envelope"></i></div>
+                       <div class="menu-text"> Inbox</div>
+                   </a>
+               </div>
+               <div class="menu-item pb-5px">
+                   <a href="calendar.php" class="menu-link">
+                       <div class="menu-icon"><i class="fa fa-calendar-alt"></i></div>
+                       <div class="menu-text"> Calendar</div>
+                   </a>
+               </div>
+               <div class="menu-item pb-5px">
+                   <a href="../index.php" class="menu-link">
+                       <div class="menu-icon"><i class="fa fa-sign-out-alt"></i></div>
+                       <div class="menu-text"> Logout</div>
+                   </a>
+               </div>
+               <div class="menu-divider m-0"></div>
+           </div>
+           <div class="menu-header">Navigation</div>
+           <div class="menu-item <%= (selmenu=='dashboard')? 'active': '' %>">
+               <a href="/admin/dashboard" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-sitemap"></i>
+                   </div>
+                   <div class="menu-text">Dashboard</div>
+               </a>
+           </div>
+           <div class="menu-item has-sub <%= ((selmenu=='category') || (selmenu=='subCategory') || (selmenu=='amenity') || (selmenu=='country') || (selmenu=='state')) ? 'active': '' %>">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-database"></i>
+                   </div>
+                   <div class="menu-text">Admin Ads Data</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item <%= (selmenu=='category') ? 'active': '' %>">
+                       <a href="/admin/category/index" class="menu-link">
+                           <div class="menu-text">Categories</div>
+                       </a>
+                   </div>
+                   <div class="menu-item <%= (selmenu=='subCategory') ? 'active': '' %>">
+                       <a href="/admin/sub-category/index" class="menu-link">
+                           <div class="menu-text">Sub Categories</div>
+                       </a>
+                   </div>
+                   <div class="menu-item <%= (selmenu=='amenity') ? 'active': '' %>">
+                       <a href="/admin/amenity/index" class="menu-link">
+                           <div class="menu-text">Amenities</div>
+                       </a>
+                   </div>
+                   <div class="menu-item has-sub <%= ((selmenu=='country') || (selmenu=='state')) ? 'active': '' %>">
+                       <a href="javascript:;" class="menu-link">
+                           <div class="menu-text">Locations</div>
+                           <div class="menu-caret"></div>
+                       </a>
+                       <div class="menu-submenu">
+                           <div class="menu-item <%= ((selmenu=='country')) ? 'active': '' %>">
+                               <a href="/admin/country/index" class="menu-link">
+                                   <div class="menu-text">Countries</div>
+                               </a>
+                           </div>
+                           <div class="menu-item <%= ((selmenu=='state')) ? 'active': '' %>">
+                               <a href="/admin/state/index" class="menu-link">
+                                   <div class="menu-text">States</div>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+
+                   <div class="menu-item <%= (selmenu=='ads') ? 'active': '' %>">
+                       <a href="/admin/ads/index" class="menu-link">
+                           <div class="menu-text">Ads</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="review-comment.php" class="menu-link">
+                           <div class="menu-text">Reviews & Comments</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub <%= (selmenu=='ads') ? 'active': '' %>">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-list"></i>
+                   </div>
+                   <div class="menu-text">Advertisements</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item <%= (selmenu=='ads') ? 'active': '' %>">
+                       <a href="/admin/ads/index" class="menu-link">
+                           <div class="menu-text">Ads</div>
+                       </a>
+                   </div>
+                   <div class="menu-submenu">
+                       <div class="menu-item">
+                           <a href="photos.php" class="menu-link">
+                               <div class="menu-text">Photos</div>
+                           </a>
+                       </div>
+                       <div class="menu-item">
+                           <a href="videos.php" class="menu-link">
+                               <div class="menu-text">Videos</div>
+                           </a>
+                       </div>
+                   </div>
+                   <div class="menu-item">
+                       <a href="review-comment.php" class="menu-link">
+                           <div class="menu-text">Reviews & Comments</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-envelope"></i>
+                   </div>
+                   <div class="menu-text">Emails</div>
+                   <div class="menu-badge">10</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="email-inbox.php" class="menu-link">
+                           <div class="menu-text">Inbox</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="email-inbox.php" class="menu-link">
+                           <div class="menu-text">Important</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="email-inbox.php" class="menu-link">
+                           <div class="menu-text">Sent</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="email-inbox.php" class="menu-link">
+                           <div class="menu-text">Draft</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="email-inbox.php" class="menu-link">
+                           <div class="menu-text">Trash</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fab fa-rocketchat"></i>
+                   </div>
+                   <div class="menu-text">Chats</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="customer-chats.php" class="menu-link">
+                           <div class="menu-text">Customers</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="business-chats.php" class="menu-link">
+                           <div class="menu-text">Businesses</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub <%= ((selmenu=='sitePage') || (selmenu=='new-sitePage') || (selmenu=='index-page')) ? 'active': '' %>">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-pencil-alt"></i>
+                   </div>
+                   <div class="menu-text">Pages</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item <%= (selmenu=='new-sitePage') ? 'active': '' %>">
+                       <a href="/admin/site-page/new" class="menu-link">
+                           <div class="menu-text">Add New</div>
+                       </a>
+                   </div>
+                   <div class="menu-item <%= (selmenu=='index-sitePage') ? 'active': '' %>">
+                       <a href="/admin/site-page/index" class="menu-link">
+                           <div class="menu-text">All Pages</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa-regular fa-star"></i>
+                   </div>
+                   <div class="menu-text">Testimonials</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="testimonial-form.php" class="menu-link">
+                           <div class="menu-text">Add New</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="testimonial-customers.php" class="menu-link">
+                           <div class="menu-text">Customers</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="testimonial-businesses.php" class="menu-link">
+                           <div class="menu-text">Businesses</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub <%= ((selmenu=='siteFaqCategory') || (selmenu=='siteFaq') || (selmenu=='new-siteFaq') || (selmenu=='index-siteFaq')) ? 'active': '' %>">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fab fa-question"></i>
+                   </div>
+                   <div class="menu-text">FAQs</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item <%= (selmenu=='siteFaqCategory') ? 'active': '' %>">
+                       <a href="/admin/site-faq-category/index" class="menu-link">
+                           <div class="menu-text">Categories</div>
+                       </a>
+                   </div>
+                   <div class="menu-item <%= (selmenu=='new-siteFaq') ? 'active': '' %>">
+                    <a href="/admin/site-faq/new" class="menu-link">
+                        <div class="menu-text">Add New</div>
+                    </a>
+                    </div>
+                   <div class="menu-item <%= (selmenu=='index-siteFaq') ? 'active': '' %>">
+                       <a href="/admin/site-faq/index" class="menu-link">
+                           <div class="menu-text">All FAQs</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub <%= ((selmenu=='sitePressCategory') || (selmenu=='sitePress') || (selmenu=='new-sitePress') || (selmenu=='index-sitePress')) ? 'active': '' %>">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa-solid fa-newspaper"></i>
+                   </div>
+                   <div class="menu-text">Press</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu <%= (selmenu=='sitePressCategory') ? 'active': '' %>">
+                   <div class="menu-item">
+                       <a href="/admin/site-press-category/index" class="menu-link">
+                           <div class="menu-text">Categories</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                    <a href="/admin/site-press/index" class="menu-link">
+                        <div class="menu-text">Add New</div>
+                    </a>
+                </div>
+                   <div class="menu-item <%= (selmenu=='index-sitePress') ? 'active': '' %>">
+                       <a href="/admin/site-press/index" class="menu-link">
+                           <div class="menu-text">All Press</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <!-- +++++++++++++++++++++++++++= -->
+           <div class="menu-item has-sub <%= ((selmenu=='siteEventCategory') || (selmenu=='siteEvent')) ? 'active': '' %>">
+            <a href="javascript:;" class="menu-link">
+                <div class="menu-icon">
+                    <i class="fa fa-blog"></i>
+                </div>
+                <div class="menu-text">Site Events</div>
+                <div class="menu-caret"></div>
+            </a>
+            <div class="menu-submenu">
+                <div class="menu-item <%= (selmenu=='siteEventCategory') ? 'active': '' %>">
+                    <a href="/admin/site-event-category/index" class="menu-link">
+                        <div class="menu-text">Categories</div>
+                    </a>
+                </div>
+                <div class="menu-item <%= (selmenu=='siteEvent') ? 'active': '' %>">
+                    <a href="/admin/site-event/index" class="menu-link">
+                        <div class="menu-text">Events</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+           <!-- +++++++++++++++++++++++++++= -->
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-calendar-alt"></i>
+                   </div>
+                   <div class="menu-text">Events old</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item has-sub">
+                       <a href="javascript:;" class="menu-link">
+                           <div class="menu-text">Admin Events</div>
+                           <div class="menu-caret"></div>
+                       </a>
+                       <div class="menu-submenu">
+                           <div class="menu-item">
+                               <a href="admin-event-form.php" class="menu-link">
+                                   <div class="menu-text">Add New</div>
+                               </a>
+                           </div>
+                           <div class="menu-item">
+                               <a href="admin-events.php" class="menu-link">
+                                   <div class="menu-text">All Events</div>
+                               </a>
+                           </div>
+                           <div class="menu-item">
+                               <a href="admin-event-categories.php" class="menu-link">
+                                   <div class="menu-text">Categories</div>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="menu-item has-sub">
+                       <a href="javascript:;" class="menu-link">
+                           <div class="menu-text">Business Events</div>
+                           <div class="menu-caret"></div>
+                       </a>
+                       <div class="menu-submenu">
+                           <div class="menu-item">
+                               <a href="business-event-form.php" class="menu-link">
+                                   <div class="menu-text">Add New</div>
+                               </a>
+                           </div>
+                           <div class="menu-item">
+                               <a href="business-events.php" class="menu-link">
+                                   <div class="menu-text">All Events</div>
+                               </a>
+                           </div>
+                           <div class="menu-item">
+                               <a href="business-event-categories.php" class="menu-link">
+                                   <div class="menu-text">Categories</div>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-blog"></i>
+                   </div>
+                   <div class="menu-text">Blogs</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="blog-form.php" class="menu-link">
+                           <div class="menu-text">Add New</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="blogs.php" class="menu-link">
+                           <div class="menu-text">All Blogs</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="blog-categories.php" class="menu-link">
+                           <div class="menu-text">Categories</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="blog-comments.php" class="menu-link">
+                           <div class="menu-text">Blog Comments</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-handshake-angle"></i>
+                   </div>
+                   <div class="menu-text">Careers</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="jobs.php" class="menu-link">
+                           <div class="menu-text">All Jobs</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="applications.php" class="menu-link">
+                           <div class="menu-text">Applications</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-futbol"></i>
+                   </div>
+                   <div class="menu-text">Supports</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="ticket-customers.php" class="menu-link">
+                           <div class="menu-text">Customer Tickets</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="ticket-businesses.php" class="menu-link">
+                           <div class="menu-text">Businesses Tickets</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="ticket-types.php" class="menu-link">
+                           <div class="menu-text">Ticket Types</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-newspaper"></i>
+                   </div>
+                   <div class="menu-text">Newsletters</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="newsletter-overview.php" class="menu-link">
+                           <div class="menu-text">Overview</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="newsletters.php" class="menu-link">
+                           <div class="menu-text">All Newsletters</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="newsletter-groups.php" class="menu-link">
+                           <div class="menu-text">Groups </div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="subscribers.php" class="menu-link">
+                           <div class="menu-text">Subscribers</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub <%= ((selmenu=='backenduser') || (selmenu=='rolePermission')) ? 'active': '' %>">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-users"></i>
+                   </div>
+                   <div class="menu-text">Users</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="customers.php" class="menu-link">
+                           <div class="menu-text">Customers</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="businesses.php" class="menu-link">
+                           <div class="menu-text">Businesses</div>
+                       </a>
+                   </div>
+                   <div class="menu-item <%= (selmenu=='backenduser')? 'active': '' %>">
+                       <a href="/admin/user/index" class="menu-link">
+                           <div class="menu-text">Backend Users</div>
+                       </a>
+                   </div>
+                   <div class="menu-item <%= (selmenu=='rolePermission')? 'active': '' %>">
+                       <a href="/admin/role-permission/index" class="menu-link">
+                           <div class="menu-text">Role & Permissions</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-circle-question"></i>
+                   </div>
+                   <div class="menu-text">Help Center</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="topics.php" class="menu-link">
+                           <div class="menu-text">All Topics</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="topic-categories.php" class="menu-link">
+                           <div class="menu-text">Categories</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item has-sub">
+               <a href="javascript:;" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-triangle-exclamation"></i>
+                   </div>
+                   <div class="menu-text">Logs</div>
+                   <div class="menu-caret"></div>
+               </a>
+               <div class="menu-submenu">
+                   <div class="menu-item">
+                       <a href="login-audits.php" class="menu-link">
+                           <div class="menu-text">Login Audits</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="error-logs.php" class="menu-link">
+                           <div class="menu-text">Error Logs</div>
+                       </a>
+                   </div>
+                   <div class="menu-item">
+                       <a href="activities.php" class="menu-link">
+                           <div class="menu-text">Activities</div>
+                       </a>
+                   </div>
+               </div>
+           </div>
+           <div class="menu-item">
+               <a href="signin.php" class="menu-link">
+                   <div class="menu-icon">
+                       <i class="fa fa-sign-out"></i>
+                   </div>
+                   <div class="menu-text">Logout</div>
+               </a>
+           </div>
+           <div class="menu-item d-flex">
+               <a href="javascript:;" class="app-sidebar-minify-btn ms-auto d-flex align-items-center text-decoration-none" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>
+           </div>
+       </div>
+   </div>
+</div>
+<div class="app-sidebar-bg" data-bs-theme="dark"></div>
+<div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>

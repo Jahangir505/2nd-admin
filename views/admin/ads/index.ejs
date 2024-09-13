@@ -1,0 +1,197 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'ads'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+<!-- ********************* Content Start ********************************* -->
+<div id="content" class="app-content p-0 bg-component" ng-controller="contentBlockController">
+    <div class="app-content-padding px-4 py-2">
+        <div class="d-lg-flex mb-lg-3 mb-2">
+            <h1 class="page-header mb-0 flex-1">All Ads</h1>
+            <span class="d-none d-lg-flex align-items-center">
+            <ol class="breadcrumb float-xl-end">
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item active">Users</li>
+               <li class="breadcrumb-item active">Backend Users</li>
+            </ol>
+         </span>
+        </div>
+        <!-- *********** Filter Start *********** -->
+        <!-- <form class="needs-validation" id="filterForm" novalidate action=<%= paginateUrl %> method="GET" enctype="multipart/form-data">
+            <div class="row gx-2 tb_form search-div custom-sniper-container bg-none" ng-controller="adsController" >
+                <div ng-show="loaderPg" id="page-loader" class="fade show model-1 custom-sniper" style="position: absolute;">
+                    <span class="spinnerArif"></span>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <div class="position-relative">
+                        <input type="text" class="form-control ps-35px rounded-1 border-0" placeholder="Please type your keywords..." name="company_name" id="company_name" value="<%= paCompanyName %>" />
+                        <button class="btn position-absolute start-0 top-0 shadow-none"><i class="fa fa-search fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="category" id="category" ng-model="frmObj.category" ng-change="getSubcategoryOfCategory()" ng-init="frmObj.category='<%= paCategory %>'">
+                        <option value="">Select category</option>
+                        <% _.each(allCategory, function (sinItem) { %>
+                            <option value="<%= sinItem.id %>" <%= sinItem.id == paCategory ? 'selected' : '' %>><%= sinItem.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select name="subcategory" class="form-select form-control" id="subcategory" ng-model="frmObj.subcategory" ng-init="frmObj.subcategory='<%= paSubcategory %>'" >
+                        <option ng-selected="true" value="">Select Sub category</option>
+                        <option ng-repeat="sinSubCat in subCategories" value="{{sinSubCat.id}}"
+                                            ng-selected="sinSubCat.id == '<%= paSubcategory %>'">{{sinSubCat.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="state" id="state">
+                        <option value="">Select state</option>
+                        <% _.each(allState, function (sinItem) { %>
+                            <option value="<%= sinItem.id %>" <%= sinItem.id == paState ? 'selected' : '' %>><%= sinItem.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="status">
+                        <option value="">Select Status</option>
+                        <option value="1" <%= paStatus == '1' ? 'selected' : '' %>>Pending</option>
+                        <option value="2" <%= paStatus == '2' ? 'selected' : '' %>>Approve</option>
+                        <option value="2" <%= paStatus == '2' ? 'selected' : '' %>>Reject</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="sort_by" id="sort_by">
+                        <option value="">Select Filter</option>
+                        <option value="ASC"  <%= paSortBy == 'ASC' ? 'selected' : '' %>>A To Z</option>
+                        <option value="DESC"  <%= paSortBy == 'DESC' ? 'selected' : '' %>>Z To A</option>
+                    </select>
+                </div>
+                <div class="col-lg-1 d-lg-block" >
+                    <input type="hidden" class="form-control" id="page_limit" name="page_limit" ng-model="fltFrmObj.pagelimit" ng-change="myFuncPP()" ng-init="fltFrmObj.pagelimit='<%= pageLimit %>'" value="{{fltFrmObj.pagelimit}}" />
+                    <button type="submit" class="btn btn-dark btn-md submit-btn"><i class="fa fa-paper-plane fa-sm"></i> Submit</button>
+                </div>
+            </div>
+        </form> -->
+        <!-- ********** Filter End ********** -->
+    </div>
+    <div class="table-responsive" id="table">
+        <table class="table table-thead-sticky table-tfoot-sticky table-tbody-bordered table-px-10px table-py-6px align-middle table-sm table-striped text-nowrap mb-0">
+            <thead>
+            <tr>
+                <th><span>#</span></th>
+                <th>Img</th>
+                <th>Company Name</th>
+                <th>License No</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Zip</th>
+                <th>Views</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% _.each(alldata, function (singledata, key) { %>
+                <tr>
+                    <!-- <td><%= key + 1 %></td> -->
+                    <td><%= ((currentPage-1)*pageLimit)+key + 1 %></td>
+                    <td>
+                        <% if (singledata.image) { %>
+                            <img src="/uploads/business-logo/<%= singledata.business_logo %>" class="rounded h-20px my-n1 mx-n1 mw-100 rounded-pill" />
+                        <% } %>
+                    </td>
+                    <td><%= singledata.business_name %></td>
+                    <td><%= singledata.license_no %></td>
+                    <td><%= singledata.state ? singledata.state.name : '' %></td>
+                    <td><%= singledata.city %></td>
+                    <td><%= singledata.zip %></td>
+                    <td><%= singledata.view ? singledata.view : 0 %></td>
+                    <td><%= singledata.createdAt ? moment(singledata.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td><%= singledata.updatedAt ? moment(singledata.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td>Active</td>
+                    <td ng-controller="commonActionController">
+                        <a href="/admin/ads/view/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link text-success fs-13px p-0 m-0"><i class="fa fa-eye text-dark"></i></button></a>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <!-- ********** Pagination Start ********** -->
+    <%- partial('../../admin/partial/index-pagination.ejs', {pageLimit: pageLimit, pageCount: pageCount, currentPage: currentPage, paginateVariable:paginateVariable, paginateUrl: paginateUrl, totalCount: totalCount}) %>
+    <!-- ********* Pagination End ********* -->
+</div>
+<!-- ******** Content End ********* -->
+
+
+<!-- ********* Panel Start ********** -->
+<div class="theme-panel">
+    <a href="javascript:;" data-toggle="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-eye"></i></a>
+    <div class="theme-panel-content" data-scrollbar="true" data-height="100%">
+        <form class="needs-validation" novalidate>
+            <div class="form-group mb-3">
+                <div class="note alert-gray-500 mb-3">
+                    <div class="note-content">
+                        <h5>Administrations Report</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>Start Date</strong></label>
+                <input type="text" class="form-control" id="datepicker-autoClose" placeholder="Please Select" />
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please select start date
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>End Date</strong></label>
+                <input type="text" class="form-control" id="datepicker-autoClose2" placeholder="Please Select" />
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please select end date
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>Status</strong></label>
+                <select class="form-select" id="" autofocus required>
+                    <option value="">Please Select</option>
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please status
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>Download</strong></label>
+                <select class="form-select" id="" autofocus required>
+                    <option value="">Please Select</option>
+                    <option value="1">Excel Sheet</option>
+                    <option value="2">PDF</option>
+                    <option value="3">MS Word</option>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please report to
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-dark">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- ********************* Panel End ************************************* -->

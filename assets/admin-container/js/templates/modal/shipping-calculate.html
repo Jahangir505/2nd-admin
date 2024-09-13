@@ -1,0 +1,76 @@
+
+
+
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Shippingcost Calculate </h3>
+
+<!--  <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--    <span aria-hidden="true">&times;</span>-->
+<!--  </button>-->
+
+  <button class="quickview__close" type="button"  ng-click="cancel()">
+   x
+  </button>
+
+
+</div>
+<div class="modal-body" id="modal-body">
+  <!--================Register Start=================-->
+  <div class="col-md-12 d-flex flex-column mt-4 mt-md-0">
+    <div class="card flex-grow-1 mb-0">
+      <div class="card-body">
+        <form  role="form" name="shippingCostForm" method="post" enctype="multipart/form-data" ng-submit="shippingCostSubmit($event)">
+          <div class="row">
+          <div class="form-group col-lg-4 col-md-6 col-sm-12 col-12" ng-init="initAllDistrict()">
+            <label class="col-form-label" for="district">District </label>
+            <select name="district" class="form-control" id="district" ng-model="frmObj.district" ng-change="findDistrictRelatedUpazilla()" ng-init="frmObj.district=''" >
+              <option ng-selected="true" value="">Please Select</option>
+              <option ng-repeat="dist in allDistrict" value="{{dist.id}}" ng-selected="dist.id == ''">{{dist.name}}</option>
+            </select>
+            <small id="errorHelp4" class="text-danger" ng-if="formErrorStatusAng === 'Error' &&  formErrorsAng.district != '' ">{{formErrorsAng.district.message}}</small>
+          </div>
+
+
+          <div class="form-group col-lg-4 col-md-6 col-sm-12 col-12">
+            <label class="col-form-label" for="upazilla">Upazilla</label>
+            <select name="upazilla" class="form-control" id="upazilla" ng-model="frmObj.upazilla" ng-init="frmObj.upazilla=''" >
+              <option ng-selected="true" value="">Please Select</option>
+              <option ng-repeat="upaz in upazillas" value="{{upaz.id}}" ng-selected="upaz.id == ''">{{upaz.name}}</option>
+            </select>
+            <small id="errorHelp4" class="text-danger" ng-if="formErrorStatusAng === 'Error' &&  formErrorsAng.upazilla != '' ">{{formErrorsAng.upazilla.message}}</small>
+          </div>
+
+            <div class="form-group col-lg-2 col-md-3 col-sm-4 col-12">
+                <label for="subhBtn" class="col-form-label">&nbsp;.</label>
+                <button style="display: block;" id="subhBtn" ng-disabled="frmObj.shippingCostSubmitButton" type="submit" ng-click="calculateSubmit($event)" class="btn btn-primary">Calculate</button>
+
+            </div>
+
+          </div>
+          <!--========================-->
+
+          <!--========================-->
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--================Register End===================-->
+</div>
+<!--<div class="modal-footer">-->
+<!--  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>-->
+<!--  <button class="btn btn-danger" type="button" ng-click="calculateSubmit()">Calculate</button>-->
+<!--</div>-->
+
+
+<!--<div class="modal-header">-->
+<!--  <h3 class="modal-title" id="modal-title">I'm a modal!</h3>-->
+<!--</div>-->
+<!--<div class="modal-body" id="modal-body">-->
+
+<!--  Selected: <b>I am Selected</b>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--  <button class="btn btn-primary" type="button" ng-click="cancel()">OK</button>-->
+<!--  <button class="btn btn-warning" type="button" ng-click="ok()">Cancel</button>-->
+<!--</div>-->

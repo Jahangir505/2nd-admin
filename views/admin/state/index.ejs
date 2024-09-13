@@ -1,0 +1,73 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'state'}) %><div id="content" class="app-content">
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+<ol class="breadcrumb float-xl-end">
+    <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+    <li class="breadcrumb-item active">Advertisements</li>
+    <li class="breadcrumb-item active">Locations</li>
+    <li class="breadcrumb-item active">States</li>
+</ol>
+<h1 class="page-header">All States <a href="<%= linknew %>"> <button type="button" class="btn btn-sm btn-outline-dark fw-bold">Add New</button></a></h1>
+<div class="row">
+    <div class="col-xl-9">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <h4 class="panel-title">Countries Table</h4>
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+            </div>
+            <div class="panel-body p-0">
+                <!-- *********** Filter Start *********** -->
+                <form class="needs-validation" id="filterForm" novalidate action=<%= paginateUrl %> method="GET" enctype="multipart/form-data">
+                    <input type="hidden" class="form-control" id="page_limit" name="page_limit" ng-model="fltFrmObj.pagelimit" ng-change="myFuncPP()" ng-init="fltFrmObj.pagelimit='<%= pageLimit %>'" value="{{fltFrmObj.pagelimit}}" />
+                </form>
+                    <!-- ********** Filter End ********** -->
+                <div class="table-responsive" id="table">
+                    <table id="data-table-responsive" width="100%" class="table table-striped table-bordered align-middle table-px-10px table-py-6px text-nowrap mb-0">
+                        <thead>
+                        <tr>
+                            <th><span>#</span></th>
+                            <th>State Name</th>
+                            <th>Country</th>
+                            <th>Slug</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% _.each(alldata, function (singledata, key) { %>
+                            <tr>
+                                <td><%= ((currentPage-1)*pageLimit)+key + 1 %></td>
+                                <td><%= singledata.name %></td>
+                                <td><%= singledata.country ? singledata.country.name : '' %></td>
+                                <td><%= singledata.slug %></td>
+                                <td><%= singledata.createdAt ? moment(singledata.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                                <td><%= singledata.updatedAt ? moment(singledata.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                                <td><%= (singledata.status == 1) ? 'Active':'Inactive' %></td>
+                                <td ng-controller="commonActionController">
+                                    <a href="/admin/state/edit/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link p-0 m-0 fs-12px"><i class="fa fa-pencil text-dark"></i></button></a>
+                                    <a href="/admin/state/view/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link text-success fs-13px p-0 m-0"><i class="fa fa-eye text-dark"></i></button></a>
+                                    <form id="itemDeleteForm<%= singledata.id %>" action='/admin/state/delete'
+                                          method='post' style="display: inline">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <input type="hidden" name="id" value="<%= singledata.id %>">
+                                        <a ng-click="clickMeForDelete($event, '<%= singledata.id %>', '<%= JSON.stringify(singledata.name) %>')" href="#" ><button type="button" class="btn btn-sm btn-link p-0 m-0 fs-14px"><i class="fa fa-times text-dark fw-bold fs-16px"></i></button></a>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <%- partial('../../admin/partial/index-pagination.ejs', {pageLimit: pageLimit, pageCount: pageCount, currentPage: currentPage, adjacents: adjacents, lpm1: lpm1, paginateVariable:paginateVariable, paginateUrl: paginateUrl}) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+

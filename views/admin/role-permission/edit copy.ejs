@@ -1,0 +1,172 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'users'}) %>
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <!-- BEGIN breadcrumb -->
+    <ol class="breadcrumb float-xl-end">
+       <li class="breadcrumb-item"><a href="admin/dashboard">Home</a></li>
+       <li class="breadcrumb-item"><a href="admin/user/index">Users</a></li>
+       <li class="breadcrumb-item active"><%= subtitle %> <%= title %></li>
+    </ol>
+    <!-- END breadcrumb -->
+    <!-- BEGIN page-header -->
+    <h1 class="page-header">Add New User</h1>
+    <!-- END page-header -->
+    <!-- BEGIN row -->
+    <div class="row">
+       <!-- BEGIN col-10 -->
+       <div class="col-xl-5">
+          <!-- BEGIN panel -->
+          <div class="panel panel-inverse">
+             <!-- BEGIN panel-heading -->
+             <div class="panel-heading">
+                <h4 class="panel-title"><%= subtitle %> <%= title %> Form</h4>
+                <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+             </div>
+             <!-- END panel-heading -->
+             <!-- BEGIN panel-body -->
+             <div class="panel-body custom-sniper-container">
+               <% if(flashMsgError && flashMsgError.length > 0 ) { %>
+                  <div class="alert alert-danger custom-alert">
+                      <% if(flashMsgError.length === 1) { %>
+                          <strong> <%= flashMsgError %> </strong>
+                      <% } else { %>
+                          <ul>
+                              <% flashMsgError.forEach(function(err) { %>
+                                  <li><strong> <%= err %> </strong></li>
+                              <% }) %>
+                          </ul>
+                      <% } %>
+                  </div>
+              <% } %>
+              <% if(flashMsgSuccess && flashMsgSuccess.length > 0 ) { %>
+                  <div class="alert alert-success custom-alert">
+                      <% if(flashMsgSuccess.length === 1) { %>
+                          <strong> <%= flashMsgSuccess %> </strong>
+                      <% } else { %>
+                          <ul>
+                              <% flashMsgSuccess.forEach(function(err) { %>
+                                  <li><strong> <%= err %> </strong></li>
+                              <% }) %>
+                          </ul>
+                      <% } %>
+                  </div>
+              <% } %>
+
+                <form class="row g-3 needs-validation" action=<%= formActionTarget %> method="POST" enctype="multipart/form-data" novalidate>
+                   <div class="col-lg-12">
+                      <label for="first_name" class="form-label">First Name <span class="star">*</span></label>
+                      <input type="text" class="form-control <%= (status === "Error" && customFieldErrors.first_name) ? 'input-custom-error' : '' %>" name="first_name" id="first_name"
+                                       placeholder="Ex: John" value="<%= data.first_name %>" required/>
+
+                                    <% if (status === "Error" && customFieldErrors.first_name) { %>
+                                        <small class="text-danger"><%= customFieldErrors.first_name.message %></small>
+                                    <% } %>
+                      
+                     
+                   </div>
+                   <div class="col-lg-12">
+                      <label for="last_name" class="form-label">Last Name <span class="star">*</span></label>
+                      <input type="text" class="form-control <%= (status === "Error" && customFieldErrors.last_name) ? 'input-custom-error' : '' %>" name="last_name" id="last_name"
+                                       placeholder="Ex: Zoha" value="<%= data.last_name %>"/>
+                                       <% if (status === "Error" && customFieldErrors.last_name) { %>
+                                        <small class="text-danger"><%= customFieldErrors.last_name.message %></small>
+                                    <% } %>
+                   </div>
+
+                   <div class="col-lg-12">
+                     <label for="nickname" class="form-label">Nickname <span class="star">*</span></label>
+                     <input type="text" class="form-control <%= (status === "Error" && customFieldErrors.nickname) ? 'input-custom-error' : '' %>" name="nickname" id="nickname"
+                                      placeholder="Ex: Zoha" value="<%= data.nickname %>"/>
+                                      <% if (status === "Error" && customFieldErrors.nickname) { %>
+                                       <small class="text-danger"><%= customFieldErrors.nickname.message %></small>
+                                   <% } %>
+                  </div>
+                   
+                   
+                   <div class="col-md-12">
+                      <label for="mobile_no" class="form-label">Mobile <span class="star">*</span></label>
+                      <input type="text" class="form-control <%= (status === "Error" && customFieldErrors.mobile_no) ? 'input-custom-error' : '' %>" name="mobile_no" id="mobile_no"
+                                       placeholder="Ex: Zoha" value="<%= data.mobile_no %>"/>
+                                       <% if (status === "Error" && customFieldErrors.mobile_no) { %>
+                                        <small class="text-danger"><%= customFieldErrors.mobile_no.message %></small>
+                                    <% } %>
+                   </div>
+                   <div class="col-md-12">
+                      <label for="email" class="form-label">Email <span class="star">*</span></label>
+                      <input type="email"
+                                       class="form-control <%= (status === "Error" && customFieldErrors.email) ? 'input-custom-error' : '' %>"
+                                       name="email" id="email" placeholder="example@domain.com"
+                                       value="<%= data.email %>">
+                                <% if (status === "Error" && customFieldErrors.email) { %>
+                                    <small class="text-danger"><%= customFieldErrors.email.message %></small>
+                                <% } %>
+                   </div>
+                                      
+                   <div class="col-md-12">
+                      <label for="role" class="form-label">Role <span class="star">*</span></label>
+                         <select name="user_role" class="form-select <%= (status === "Error" && customFieldErrors.user_role) ? 'input-custom-error' : '' %>" id="user_role">
+                                    <option value="">Please Select</option>
+                                        <option value="1" <%= (data.user_role == 1) ? 'selected' : '' %>>Admin</option>
+                                        <option value="2" <%= (data.user_role == 2) ? 'selected' : '' %>>Employer</option>
+                                        <option value="3" <%= (data.user_role == 3) ? 'selected' : '' %>>Employee</option>
+                                </select>
+                           <% if (status === "Error" && customFieldErrors.user_role) { %>
+                              <span class="text-danger"><%= customFieldErrors.user_role.message %></span>
+                           <% } %>
+                   </div>
+                   <div class="col-md-12">
+                      <label for="status" class="form-label">Status <span class="star">*</span></label>
+                      <select class="form-select" id="status" name="status" required >
+                         <option value="">Please Select</option>
+                         <option value="1" <%= (data.status == 1) ? 'selected' : '' %>>Active</option>
+                         <option value="2" <%= (data.status == 2) ? 'selected' : '' %>>Inactive</option>
+                         <option value="3" <%= (data.status == 3) ? 'selected' : '' %>>Pending</option>
+                         <option value="4" <%= (data.status == 4) ? 'selected' : '' %>>Suspend</option>
+                      </select>
+                     <% if (status === "Error" && customFieldErrors.status) { %>
+                        <span class="text-danger"><%= customFieldErrors.status.message %></span>
+                     <% } %>
+                   </div>
+                   <!--==========================Image Block Start============================-->
+                   <br/>
+                   <fieldset class="fieldset-custom-border">
+                     <legend class="legend-custom-border">Image</legend>
+
+                     <div class="row">
+                         <div class="form-group col-lg-4 col-md-6 col-sm-12 col-12">
+                             <input type="hidden" name="oldImage" class="form-control"  id="oldImage" value="<%=data.image%>">
+                             <label class="col-form-label" for="image">&nbsp;</label>
+                             <input class="form-control <%= (status === "Error" && customFieldErrors.image) ? 'input-custom-error': '' %>" type="file" id="image" name="image">
+                             <p class="help-block">Upload File Image</p>
+                             <% if (status === "Error" && customFieldErrors.image) { %><span class="text-danger custom-error"><%=customFieldErrors.image.message %></span><% } %>
+                         </div>
+                         
+                         <div class="form-group col-lg-5 col-md-6 col-sm-12 col-12">
+
+                             <% if (data.image) { %>
+                             <label class="col-form-label" for="sort">Uploaded Image</label>
+
+                             <div class="image" >
+                                 <img style=" max-width: 150px;" src="/uploads/user-image/<%=data.image %>" alt="">
+                             </div>
+                             <% }else{ %>
+                                 <b>No File Uploaded For this </b>
+                             <% } %>
+                         </div>
+                     </div>
+                 </fieldset>
+                 <!--==========================Image Block End==============================-->
+                   <div class="col-12">
+                      <button class="btn btn-dark" type="submit">Submit</button>
+                   </div>
+                </form>
+             </div>
+             <!-- END panel-body -->
+          </div>
+          <!-- END panel -->
+       </div>
+       <!-- END col-10 -->
+    </div>
+    <!-- END row -->
+ </div>
+ <!-- END #content -->

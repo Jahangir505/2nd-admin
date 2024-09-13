@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"slug":{"$numberInt":"1"}},"name":"slug_1","unique":true,"sparse":true}],"uuid":"5f7e94e542da4ba597e61ce88c64fb3f","collectionName":"businessEmbeddedVideo","type":"collection"}

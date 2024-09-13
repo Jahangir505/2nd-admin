@@ -1,0 +1,72 @@
+
+
+
+<div class="modal-content">
+<div class="modal-header">
+  <h3 class="modal-title" id="modal-title">Order Invoice# {{sinOrder.invoice}}  Billing Details</h3>
+</div>
+<div class="modal-body" id="modal-body">
+  <table id="data-table-responsive"
+                           class="table table-striped table-bordered table-td-valign-middle">
+                       
+                        <tbody>
+                            <tr>
+                                <th>First Name</th>
+                                <td>{{sinOrder.billing_first_name}}</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>Last Name</th>
+                                <td>{{sinOrder.billing_last_name}}</td>
+                            </tr>
+                            
+                            <tr>
+                                <th>Company Name</th>
+                                <td>{{sinOrder.billing_company_name}}</td>
+                            </tr>
+                            <tr>
+                                <th>Street Address</th>
+                                <td>{{sinOrder.billing_street_address}}</td>
+                            </tr>
+                            <tr>
+                                <th>Street Address 2</th>
+                                <td>{{sinOrder.billing_street_address2}}</td>
+                            </tr>
+                            <tr>
+                                <th>Street Address 3</th>
+                                <td>{{sinOrder.billing_street_address3}}</td>
+                            </tr>
+                            <tr>
+                                <th>City</th>
+                                <td>{{sinOrder.billing_city}}</td>
+                            </tr>
+                            <tr>
+                                <th>Post Code</th>
+                                <td>{{sinOrder.billing_post_code}}</td>
+                            </tr>
+                            <tr>
+                                <th>County</th>
+                                <td>{{sinOrder.billing_county}}</td>
+                            </tr>
+                            <tr>
+                                <th>Country</th>
+                                <td>{{sinOrder.billing_country}}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{sinOrder.billing_email}}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{{sinOrder.billing_phone}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-warning" type="button" ng-click="billingCancel()">Cancel</button>
+  <!-- <button class="btn btn-danger" type="button" ng-click="billingOk()">Delete</button> -->
+
+</div>
+</div>

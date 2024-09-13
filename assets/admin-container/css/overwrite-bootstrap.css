@@ -1,0 +1,96 @@
+/*.container{*/
+  /*border: 2px solid #eaeaea;*/
+  /*padding-top: 15px;*/
+  /*position: relative*/
+
+/*}*/
+
+.table-responsive {
+  max-height:70vh;
+}
+
+
+.navbar-inverse {
+  background-image: -webkit-linear-gradient(top, #296eb1 0%, #296eb1 100%);
+  background-image: -o-linear-gradient(top, #296eb1 0%, #296eb1 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#296eb1), to(#296eb1));
+  background-image: linear-gradient(to bottom, #296eb1 0%, #296eb1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#296eb1', endColorstr='#296eb1', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  background-repeat: repeat-x;
+  border-radius: 0px;
+
+   background-color: #296eb1;
+   /*border-color: #296eb1;*/
+   border-color: #000;
+}
+
+.navbar-inverse .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: #296eb1;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #2098D1;
+  background-image: -webkit-linear-gradient(top, #2098D1 0%, #2098D1 100%);
+  background-image: -o-linear-gradient(top, #2098D1 0%, #2098D1 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2098D1), to(#2098D1));
+  background-image: linear-gradient(to bottom, #2098D1 0%, #2098D1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2098D1', endColorstr='#ff2098D1', GradientType=0);
+  background-repeat: repeat-x;
+}
+
+.top-nav>.open>.dropdown-menu {
+  float: left;
+  position: absolute;
+  margin-top: 0;
+  border: 1px solid rgba(0,0,0,.15);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background-color: #296eb1;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+
+
+.dropdown-menu>li>a {
+  display: block;
+  padding: 3px 10px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #2098D1;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color: #ffffff;
+}
+
+
+/*==========Date Peaker Start=======*/
+
+.btn-default:active, .btn-default.active {
+  background-color: #269abc;
+  border-color: #ffffff;
+}
+
+.text-info {
+  /*color: #000000;*/
+  color: #000000;
+  font-weight: bold;
+  /*font-size: 12px;*/
+}
+
+/*==========Date Peaker End=======*/

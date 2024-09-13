@@ -1,0 +1,79 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'backenduser'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index"><%= module %></a></li>
+        <li class="breadcrumb-item active">Add new</li>
+    </ol>
+    <h1 class="page-header">Add new <small><%= module %></small></h1>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><%= title %> Form</h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <div class="panel-body " ng-controller="userController">
+                    <form class="needs-validation" name="demo-form" action=<%= formActionTarget %> method="POST" enctype="multipart/form-data" novalidate>
+                        <div class="row custom-sniper-container">
+                            <div ng-show="loaderPg" id="page-loader" class="fade show model-1 custom-sniper" style="position: absolute;">
+                                <span class="spinnerArif"></span>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="title" class="form-label col-form-label-lg pb-1">Title <span class="star">*</span></label>
+                                <input type="title" class="form-control form-control-lg fs-6 title" title="title" id="title" name="title" value="<%= data.title %>"  minlength="4" maxlength="20" placeholder="E.g. johndoe@gmail.com" aria-describedby="" autofocus />
+                                <% if (status === "Error" && customFieldErrors.title) { %>
+                                    <span class="text-danger"><%= customFieldErrors.title.message %></span>
+                                <% } %>
+                            </div>
+                            
+                            <div class="col-md-6 bg-light-input">
+                                <label for="status" class="form-label col-form-label-lg pb-1">Status <span class="star">*</span></label>
+                                <select class="form-select fs-6 status" id="status" name="status"  title="status" autofocus >
+                                    <option value="">Please Select</option>
+                                    <option value="1" <%= (data.status == 1) ? 'selected' : '' %>>Active</option>
+                                    <option value="2" <%= (data.status == 2) ? 'selected' : '' %>>Inactive</option>
+                                    <option value="3" <%= (data.status == 3) ? 'selected' : '' %>>Pending</option>
+                                </select>
+                                <% if (status === "Error" && customFieldErrors.status) { %>
+                                    <span class="text-danger"><%= customFieldErrors.status.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="image" class="form-label col-form-label-lg pb-1">Image <span class="star">*</span></label>
+                                <div class="d-flex">
+                                    <div class="w-100 pe-2">
+                                        <input type="hidden" name="oldImage" class="form-control"  id="oldImage" value="<%=data.image%>">
+                                        <!-- <input type="file" name="image" id="image" title="image" class="form-control form-control-lg fs-6 image"> -->
+                                        <input type="file" id="image" name="image" class="form-control form-control-lg fs-6 ">
+                                    </div>
+                                    <% if (data.image) { %>
+                                        <div class="flex-shrink-1">
+                                            <div class="rounded-circle d-flex justify-content-center align-items-center" alt="Avatar">
+                                                <img class="rounded h-40px rounded-pill" src="/uploads/pages/<%= data.image %>" alt="Arille">
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <% if (status === "Error" && customFieldErrors.image) { %>
+                                    <span class="text-danger"><%= customFieldErrors.image.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                                <button class="btn btn-md btn-dark" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END #content -->

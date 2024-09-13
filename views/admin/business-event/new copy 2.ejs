@@ -1,0 +1,198 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'new-siteEvent'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index"><%= module %></a></li>
+        <li class="breadcrumb-item active">Add new</li>
+    </ol>
+    <h1 class="page-header">Add new <small><%= module %></small></h1>
+    <div class="row">
+        <div class="col-xl-9">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><%= title %> Form</h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <div class="panel-body pt-2" ng-controller="siteEventNewController">
+                    <form class="needs-validation" name="demo-form" action="<%= formActionTarget %>" method="POST" enctype="multipart/form-data" novalidate>
+                        <div class="row custom-sniper-container">
+                            <div ng-show="loaderPg" id="page-loader" class="fade show model-1 custom-sniper" style="position: absolute;">
+                                <span class="spinnerArif"></span>
+                            </div>
+                            <div class="row">
+                                <!-- <div class="col-xl-6"> -->
+                                    <!-- ======================== -->
+                                    <div class="col-md-3 bg-light-input mb-2">
+                                        <label for="start_date" class="form-label col-form-label-lg pb-1">Form Date (DD-MM-YYYY)</label>
+                                        <div class="input-group mb-3 z-index-zero" ng-init="initStartDate('<%= data.start_date_time %>')">
+                                            <input type="text" placeholder="DD-MM-YYYY" id="start_date" name="start_date" class="form-control form-control-lg fs-6" uib-datepicker-popup="{{startDateFormat}}" ng-model="startDate"  clear-text="Clear" close-on-date-selection="true" on-open-focus="false" show-button-bar="true" popup-placement="auto bottom-left" is-open="openedExpirationDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" readonly />
+                                            <span class="input-group-text input-group-addon" ng-click="openStartDate($event)"><i class="fa fa-calendar"></i></span>
+                                                <span class="input-group-text input-group-addon" ng-click="clearStartDate($event)"><i class="fa fa-trash"></i></span>
+                                        </div>
+                                        <% if (status === "Error" && customFieldErrors.expiration_date) { %>
+                                            <span class="text-danger custom-error"><%= customFieldErrors.expiration_date.message %></span>
+                                        <% } %>
+                                      </div>
+                                      <div class="col-md-3 bg-light-input mb-2">
+                                            <!-- <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="{{hstep}}" minute-step="{{mstep}}" show-meridian="{{ismeridian}}"></div> -->
+                                            <div uib-timepicker ng-model="startTime" max="today" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian" readonly-input="true"></div>
+                                            <input type="text" name="start_time" value="{{startTime | date:'shortTime' }}"> 
+                                        </div> 
+                            </div>
+                                    
+                                    <!-- ======================== -->
+                                <!-- </div> -->
+                            <div class="col-xl-6">
+                                <div class="col-md-12 bg-light-input">
+                                    <label for="details" class="form-label col-form-label-lg">Event Detail <span class="star">*</span></label>
+                                    <textarea class="form-control form-control-lg fs-6"  name="details" id="details" placeholder="Write details here" minlength="4"  rows="28" ><%=data.details%></textarea>
+                                    <% if (status === "Error" && customFieldErrors.details) { %>
+                                        <span class="text-danger"><%= customFieldErrors.details.message %></span>
+                                    <% } %>
+                                    </div>
+                            </div>
+                           
+                            <div class="col-xl-3">
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="title" class="form-label col-form-label-lg pb-1">Event Title <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="title" id="title" value="<%= data.title %>" placeholder="E. g. How do sale a product">
+                                    <% if (status === "Error" && customFieldErrors.title) { %>
+                                        <span class="text-danger"><%= customFieldErrors.title.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="image" class="form-label col-form-label-lg pb-1">Image <span class="star">*</span></label>
+                                    <input type="file" name="image" id="image" class="form-control form-control-lg fs-6" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please upload image.
+                                    </div>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="category" class="form-label col-form-label-lg pb-1">Category <span class="star">*</span></label>
+                                    <select class="form-select form-select-lg fs-6" id="category" name="category">
+                                        <option value="">Select Category</option>
+                                        <% _.each(allCategory, function (sinItem) { %>
+                                            <option value="<%= sinItem.id %>" <%= sinItem.id == data.category ? 'selected' : '' %>><%= sinItem.name %></option>
+                                        <% }) %>
+                                    </select>
+                                    <% if (status === "Error" && customFieldErrors.category) { %>
+                                        <span class="text-danger"><%= customFieldErrors.category.message %></span>
+                                    <% } %>
+                                </div>
+                                <!-- <div class="col-md-12 bg-light-input mb-2">
+                                    <label class="form-label col-form-label-lg pb-1" for="start_date_time">From Date Time <span class="star">*</span></label>
+                                    <input class="form-control start_date_time" id="start_date_time" title="start_date_time" type="datetime-local" value="<%= data.start_date_time %>" placeholder="" />
+                                    <% if (status === "Error" && customFieldErrors.start_date_time) { %>
+                                        <span class="text-danger"><%= customFieldErrors.start_date_time.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label class="form-label col-form-label-lg pb-1" for="end_date_time">End Date Time <span class="star">*</span></label>
+                                    <input class="form-control end_date_time" id="end_date_time" title="end_date_time" type="datetime-local" value="<%= data.end_date_time %>" placeholder="" />
+                                    <% if (status === "Error" && customFieldErrors.end_date_time) { %>
+                                        <span class="text-danger"><%= customFieldErrors.end_date_time.message %></span>
+                                    <% } %>
+                                </div> -->
+                                
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="venue_name" class="form-label col-form-label-lg pb-1">Venue Name <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg  fs-6" name="venue_name" value="<%= data.venue_name %>" id="venue_name" placeholder="E. g. Brothers convention Hall " />
+                                    <% if (status === "Error" && customFieldErrors.venue_name) { %>
+                                        <span class="text-danger"><%= customFieldErrors.venue_name.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="ticket_price" class="form-label col-form-label-lg pb-1">Ticket Price <span class="star">*</span></label>
+                                    <input type="number" class="form-control form-control-lg fs-6" name="ticket_price" value="<%= data.ticket_price %>" id="ticket_price" placeholder="E. g. 100.00" />
+                                    <% if (status === "Error" && customFieldErrors.ticket_price) { %>
+                                        <span class="text-danger"><%= customFieldErrors.ticket_price.message %></span>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="address" class="form-label col-form-label-lg pb-1">Address <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg  fs-6" name="address" value="<%= data.address %>" id="address" placeholder="E. g. 13th Street. 47 W 13th St," />
+                                    <% if (status === "Error" && customFieldErrors.ticket_price) { %>
+                                        <span class="text-danger"><%= customFieldErrors.ticket_price.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="phone_no" class="form-label col-form-label-lg pb-1">Phone_no <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="phone_no" value="<%= data.phone_no %>" id="phone_no" oninput="this.value = this.value.replace(/[^0-9+]/g, '').replace(/(\..*?)\..*/g, '$1');"  placeholder="E. g. +8801722620039" >
+                                    <% if (status === "Error" && customFieldErrors.phone_no) { %>
+                                        <span class="text-danger"><%= customFieldErrors.phone_no.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="city" class="form-label col-form-label-lg pb-1">City <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="city" value="<%= data.city %>" id="city"  placeholder="E. g. New York" />
+                                    <% if (status === "Error" && customFieldErrors.city) { %>
+                                        <span class="text-danger"><%= customFieldErrors.city.message %></span>
+                                    <% } %>
+                                </div>
+                                
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="state" class="form-label col-form-label-lg pb-1">State <span class="star">*</span></label>
+                                    <select class="form-select form-select-lg fs-6" id="state" name="state">
+                                        <option value="">Select state</option>
+                                        <% _.each(allState, function (sinItem) { %>
+                                            <option value="<%= sinItem.id %>" <%= sinItem.id == data.state ? 'selected' : '' %>><%= sinItem.name %></option>
+                                        <% }) %>
+                                    </select>
+                                    <% if (status === "Error" && customFieldErrors.state) { %>
+                                        <span class="text-danger"><%= customFieldErrors.state.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="website" class="form-label col-form-label-lg pb-1">Website <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="website" value="<%= data.website %>" id="website"  placeholder="E. g. www.2ndafriendly.live" />
+                                    <% if (status === "Error" && customFieldErrors.website) { %>
+                                        <span class="text-danger"><%= customFieldErrors.website.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-2">
+                                    <label for="zip_code" class="form-label col-form-label-lg pb-1">Zip Code <span class="star">*</span></label>
+                                    <input type="text" class="form-control form-control-lg fs-6" name="zip_code" id="zip_code" value="<%= data.zip_code %>"  placeholder="E. g. 930390" />
+                                    <% if (status === "Error" && customFieldErrors.zip_code) { %>
+                                        <span class="text-danger"><%= customFieldErrors.zip_code.message %></span>
+                                    <% } %>
+                                </div>
+                                <div class="col-md-12 bg-light-input mb-3">
+                                    <label for="status" class="form-label col-form-label-lg pb-1">Status <span class="star">*</span></label>
+                                    <select class="form-select form-select-lg fs-6" id="status" name="status" required>
+                                        <option value="">Select Status</option>
+                                        <option value="1" <%= (data.status == 1) ? 'selected' : '' %>>Active</option>
+                                        <option value="2" <%= (data.status == 2) ? 'selected' : '' %>>Inactive</option>
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Please select status.
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                                        <button class="btn btn-lg btn-dark" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END #content -->

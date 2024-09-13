@@ -1,0 +1,177 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'siteFaq'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+<!-- ********************* Content Start ********************************* -->
+<div id="content" class="app-content p-0 bg-component" ng-controller="contentBlockController">
+    <div class="app-content-padding px-4 py-2">
+        <div class="d-lg-flex mb-lg-3 mb-2">
+            <h1 class="page-header mb-0 flex-1">All <%= module %> <a href="<%= linknew %>"> <button type="button" class="btn btn-sm btn-outline-dark fw-bold">Add New</button></a></h1>
+            <span class="d-none d-lg-flex align-items-center">
+            <ol class="breadcrumb float-xl-end">
+               <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+               <li class="breadcrumb-item active">FAQs</li>
+                <li class="breadcrumb-item active">All FAQs</li>
+            </ol>
+         </span>
+        </div>
+        <!-- *********** Filter Start *********** -->
+        <form class="needs-validation" id="filterForm" novalidate action=<%= paginateUrl %> method="GET" enctype="multipart/form-data">
+            <div class="row gx-2 tb_form search-div custom-sniper-container bg-none" ng-controller="demoController" >
+                <div ng-show="loaderPg" id="page-loader" class="fade show model-1 custom-sniper" style="position: absolute;">
+                    <span class="spinnerArif"></span>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <div class="position-relative">
+                        <input type="text" class="form-control ps-35px rounded-1 border-0" placeholder="Please type your keywords..." name="title" id="title" value="<%= paTitle %>" />
+                        <button class="btn position-absolute start-0 top-0 shadow-none"><i class="fa fa-search fa-lg"></i></button>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="category">
+                        <option value="">Select Category</option>
+                        <% _.each(allCategory, function (sinItem) { %>
+                            <option value="<%= sinItem.id %>" <%= sinItem.id == paCategory ? 'selected' : '' %>><%= sinItem.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+
+
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="status">
+                        <option value="">Select Status</option>
+                        <option value="1" <%= paStatus == '1' ? 'selected' : '' %>>Active</option>
+                        <option value="2" <%= paStatus == '2' ? 'selected' : '' %>>Inactive</option>
+                    </select>
+                </div>
+                <div class="col-lg-2 d-lg-block">
+                    <select class="form-select form-control" name="sort_by" id="sort_by">
+                        <option value="">Select Filter</option>
+                        <option value="ASC"  <%= paSortBy == 'ASC' ? 'selected' : '' %>>A To Z</option>
+                        <option value="DESC"  <%= paSortBy == 'DESC' ? 'selected' : '' %>>Z To A</option>
+                    </select>
+                </div>
+                <div class="col-lg-1 d-lg-block" >
+                    <input type="hidden" class="form-control" id="page_limit" name="page_limit" ng-model="fltFrmObj.pagelimit" ng-change="myFuncPP()" ng-init="fltFrmObj.pagelimit='<%= pageLimit %>'" value="{{fltFrmObj.pagelimit}}" />
+                    <button type="submit" class="btn btn-dark btn-md submit-btn"><i class="fa fa-paper-plane fa-sm"></i> Submit</button>
+                </div>
+            </div>
+        </form>
+        <!-- ********** Filter End ********** -->
+    </div>
+    <div class="table-responsive" id="table">
+        <table class="table table-thead-sticky table-tfoot-sticky table-tbody-bordered table-px-10px table-py-6px align-middle table-sm table-striped text-nowrap mb-0">
+            <thead>
+            <tr>
+                <th><span>#</span></th>
+                <th>Title</th>
+                <th>Details</th>
+                <th>Category</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% _.each(alldata, function (singledata, key) { %>
+                <tr>
+                    <td><%= ((currentPage-1)*pageLimit)+key + 1 %></td>
+                    <td><%= singledata.title %></td>
+                    <td><%= singledata.details %></td>
+                    <td><%= singledata.siteFaqCategory ? singledata.siteFaqCategory.name : '' %></td>
+                    <td><%= singledata.createdAt ? moment(singledata.createdAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td><%= singledata.updatedAt ? moment(singledata.updatedAt).format('DD-MMM-YYYY') : 'Not Set yet' %></td>
+                    <td><%= (singledata.status == 1) ? 'Active':'Inactive' %></td>
+                    <td ng-controller="commonActionController">
+                        <a href="/admin/site-faq/edit/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link p-0 m-0 fs-12px"><i class="fa fa-pencil text-dark"></i></button></a>
+                        <a href="/admin/site-faq/view/<%= singledata.id %>"><button type="button" class="btn btn-sm btn-link text-success fs-13px p-0 m-0"><i class="fa fa-eye text-dark"></i></button></a>
+                        <form id="itemDeleteForm<%= singledata.id %>" action='/admin/site-faq/delete'
+                              method='post' style="display: inline">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="hidden" name="id" value="<%= singledata.id %>">
+                            <a ng-click="clickMeForDelete($event, '<%= singledata.id %>', 'aaa')" href="#" ><button type="button" class="btn btn-sm btn-link p-0 m-0 fs-14px"><i class="fa fa-times text-dark fw-bold fs-16px"></i></button></a>
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <!-- ********** Pagination Start ********** -->
+    <%- partial('../../admin/partial/index-pagination.ejs', {pageLimit: pageLimit, pageCount: pageCount, currentPage: currentPage, paginateVariable:paginateVariable, paginateUrl: paginateUrl, totalCount: totalCount}) %>
+    <!-- ********* Pagination End ********* -->
+</div>
+<!-- ******** Content End ********* -->
+
+
+<!-- ********* Panel Start ********** -->
+<div class="theme-panel">
+    <a href="javascript:;" data-toggle="theme-panel-expand" class="theme-collapse-btn"><i class="fa fa-eye"></i></a>
+    <div class="theme-panel-content" data-scrollbar="true" data-height="100%">
+        <form class="needs-validation" novalidate>
+            <div class="form-group mb-3">
+                <div class="note alert-gray-500 mb-3">
+                    <div class="note-content">
+                        <h5>Administrations Report</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>Start Date</strong></label>
+                <input type="text" class="form-control" id="datepicker-autoClose" placeholder="Please Select" />
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please select start date
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>End Date</strong></label>
+                <input type="text" class="form-control" id="datepicker-autoClose2" placeholder="Please Select" />
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please select end date
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>Status</strong></label>
+                <select class="form-select" id="" autofocus required>
+                    <option value="">Please Select</option>
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please status
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="formFile" class="form-label"><strong>Download</strong></label>
+                <select class="form-select" id="" autofocus required>
+                    <option value="">Please Select</option>
+                    <option value="1">Excel Sheet</option>
+                    <option value="2">PDF</option>
+                    <option value="3">MS Word</option>
+                </select>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please report to
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-sm btn-dark">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- ********************* Panel End ************************************* -->

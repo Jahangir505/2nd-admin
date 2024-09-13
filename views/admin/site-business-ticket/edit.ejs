@@ -1,0 +1,156 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'backenduser'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">Users</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index">Backend Users</a></li>
+        <li class="breadcrumb-item active">Edit</li>
+    </ol>
+    <h1 class="page-header">Edit <small>Backend Users</small></h1>
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Backend User Form</h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <div class="panel-body pt-2" ng-controller="userController">
+                    <form class="needs-validation" name="demo-form" action=<%= formActionTarget %> method="POST" enctype="multipart/form-data" novalidate>
+                        <div class="row custom-sniper-container">
+                            <div ng-show="loaderPg" id="page-loader" class="fade show model-1 custom-sniper" style="position: absolute;">
+                                <span class="spinnerArif"></span>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="email" class="form-label col-form-label-lg pb-1">Email <span class="star">*</span></label>
+                                <input type="email" class="form-control form-control-lg fs-6 email" title="email" id="email" name="email" value="<%= sinExistdata.email %>"  placeholder="Enter your email here" disabled />
+                                <% if (status === "Error" && customFieldErrors.email) { %>
+                                    <span class="text-danger"><%= customFieldErrors.email.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="username" class="form-label col-form-label-lg pb-1">Username <span class="star">*</span></label>
+                                <div class="input-group has-validation">
+                                    <span class="input-group-text" id="">@</span>
+                                    <input type="text" class="form-control form-control-lg fs-6 username" title="username" id="username" name="username"  value="<%= sinExistdata.username %>" placeholder="Type your username here" disabled />
+                                </div>
+                                <% if (status === "Error" && customFieldErrors.username) { %>
+                                    <span class="text-danger"><%= customFieldErrors.username.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="first_name" class="form-label col-form-label-lg pb-1">First name <span class="star">*</span></label>
+                                <input type="text" class="form-control form-control-lg first_name fs-6 bg-light-input" title="first_name" id="first_name" name="first_name" value="<%= data.first_name %>" placeholder="Type your first name here" aria-describedby="" autofocus />
+                                <% if (status === "Error" && customFieldErrors.first_name) { %>
+                                    <span class="text-danger"><%= customFieldErrors.first_name.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="last_name" class="form-label col-form-label-lg pb-1">Last name <span class="star">*</span></label>
+                                <input type="text" class="form-control form-control-lg last_name fs-6" title="last_name" id="last_name" name="last_name" value="<%= data.last_name %>" minlength="4" maxlength="20" placeholder="Type your last name here" aria-describedby="" autofocus />
+                                <% if (status === "Error" && customFieldErrors.last_name) { %>
+                                    <span class="text-danger"><%= customFieldErrors.last_name.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="rolePermission" class="form-label col-form-label-lg pb-1">Role <span class="star">*</span></label>
+                                <select class="form-select form-select-lg fs-6 rolePermission"  name="rolePermission" id="rolePermission"  title="rolePermission" >
+                                    <option value="">Please Select</option>
+                                    <% _.each(allRolePermission, function (sinRpersion) { %>
+                                    <option value="<%=sinRpersion.id%>" <%= sinRpersion.id == data.rolePermission ? 'selected' : '' %>><%=sinRpersion.role_name%></option>
+                                    <% }) %>
+                                </select>
+                                <% if (status === "Error" && customFieldErrors.rolePermission) { %>
+                                    <span class="text-danger"><%= customFieldErrors.rolePermission.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="" class="form-label col-form-label-lg pb-1">Mobile <span class="star">*</span></label>
+                                <input type="number" class="form-control form-control-lg fs-6" title="" id="mobile_no" name="mobile_no" value="<%= data.mobile_no %>" minlength="4" maxlength="20" placeholder="Enter your mobile number here"  />
+                                <% if (status === "Error" && customFieldErrors.mobile_no) { %>
+                                    <span class="text-danger"><%= customFieldErrors.mobile_no.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="street_address" class="form-label col-form-label-lg pb-1">Street Address <span class="star">*</span></label>
+                                <input type="text" class="form-control form-control-lg fs-6 street_address" title="street_address" name="street_address" id="street_address" value="<%= data.street_address %>" placeholder="Type your street address here"  />
+                                <% if (status === "Error" && customFieldErrors.street_address) { %>
+                                    <span class="text-danger"><%= customFieldErrors.street_address.message %></span>
+                                <% } %>
+                            </div>
+                            <!-- ================================== -->
+                            
+                            <div class="col-md-6 bg-light-input">
+                                <label for="state" class="form-label col-form-label-lg pb-1">State <span class="star">*</span></label>
+                                <select name="state" class="form-select fs-6 state" id="state" ng-model="frmObj.state" ng-init="frmObj.state='<%= data.state %>'" >
+                                    <option value="" selected>Select State</option>
+                                    <% _.each(allState, function (sinItem) { %>
+                                        <option value="<%= sinItem.id %>" <%= sinItem.id == data.state ? 'selected' : '' %>><%= sinItem.name %></option>
+                                    <% }) %>
+                                </select>
+                                <% if (status === "Error" && customFieldErrors.state) { %>
+                                    <span class="text-danger"><%= customFieldErrors.state.message %></span>
+                                <% } %>
+                            </div>
+                            <!-- ====================================== -->
+                            <div class="col-md-6 bg-light-input">
+                                <label for="city" class="form-label col-form-label-lg pb-1">City <span class="star">*</span></label>
+                                <input type="text" class="form-control form-control-lg fs-6 city" title="city" id="city" name="city" value="<%= data.city %>" minlength="4" maxlength="50" placeholder="Type your city name here" aria-describedby="" autofocus />
+                                <% if (status === "Error" && customFieldErrors.city) { %>
+                                    <span class="text-danger"><%= customFieldErrors.city.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="zip" class="form-label col-form-label-lg pb-1">Zip <span class="star">*</span></label>
+                                <input type="number" class="form-control form-control-lg fs-6 zip" title="zip" id="zip" name="zip" value="<%= data.zip %>" minlength="4" maxlength="50" placeholder="|Type zip code here" aria-describedby="" autofocus />
+                                <% if (status === "Error" && customFieldErrors.zip) { %>
+                                    <span class="text-danger"><%= customFieldErrors.zip.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="status" class="form-label col-form-label-lg pb-1">Status <span class="star">*</span></label>
+                                <select class="form-select form-select-lg fs-6 status" id="status" name="status"  title="status" autofocus >
+                                    <option value="">Please Select</option>
+                                    <option value="1" <%= (data.status == 1) ? 'selected' : '' %>>Active</option>
+                                    <option value="2" <%= (data.status == 2) ? 'selected' : '' %>>Inactive</option>
+                                    <option value="3" <%= (data.status == 3) ? 'selected' : '' %>>Pending</option>
+                                </select>
+                                <% if (status === "Error" && customFieldErrors.status) { %>
+                                    <span class="text-danger"><%= customFieldErrors.status.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-6 bg-light-input">
+                                <label for="image" class="form-label col-form-label-lg pb-1">Image <span class="star">*</span></label>
+                                <div class="d-flex">
+                                    <div class="w-100 pe-2">
+                                        <input type="hidden" name="oldImage" class="form-control"  id="oldImage" value="<%=data.image%>">
+                                        <!-- <input type="file" name="image" id="image" title="image" class="form-control form-control-lg fs-6 image"> -->
+                                        <input type="file" id="image" name="image" class="form-control form-control-lg fs-6 ">
+                                    </div>
+                                    <% if (data.image) { %>
+                                        <div class="flex-shrink-1">
+                                            <div class="rounded-circle d-flex justify-content-center align-items-center" alt="Avatar">
+                                                <img class="rounded h-40px rounded-pill" src="/uploads/backend-user/<%= data.image %>" alt="Arille">
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                <% if (status === "Error" && customFieldErrors.image) { %>
+                                    <span class="text-danger"><%= customFieldErrors.image.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                                <button class="btn btn-md btn-dark" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END #content -->

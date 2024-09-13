@@ -1,0 +1,71 @@
+<%- partial('../../layouts/admin-sidebar.ejs', {selmenu: 'helpCenter'}) %>
+<!--************ Alert Start *************-->
+<%- partial('../../admin/partial/alert.ejs', {flashMsgError: flashMsgError, flashMsgSuccess: flashMsgSuccess}) %>
+
+<!--************ Alert End *************-->
+
+<!-- BEGIN #content -->
+<div id="content" class="app-content">
+    <ol class="breadcrumb float-xl-end">
+        <li class="breadcrumb-item"><a href="/admin/dashboard">Dashboard</a></li>
+        <li class="breadcrumb-item active">FAQs</li>
+        <li class="breadcrumb-item"><a href="/admin/user/index">All FAQs</a></li>
+        <li class="breadcrumb-item active">Add new</li>
+    </ol>
+    <h1 class="page-header">Add new <small><%= module %></small></h1>
+    <div class="row">
+        <div class="col-xl-9">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><%= title %> Form</h4>
+                    <div class="panel-heading-btn"> <a href="javascript:;" class="btn btn-xs btn-icon btn-default" data-toggle="panel-expand"><i class="fa fa-expand"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-success" data-toggle="panel-reload"><i class="fa fa-redo"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-warning" data-toggle="panel-collapse"><i class="fa fa-minus"></i></a> <a href="javascript:;" class="btn btn-xs btn-icon btn-danger" data-toggle="panel-remove"><i class="fa fa-times"></i></a> </div>
+                </div>
+                <div class="panel-body pt-2" ng-controller="demoController">
+                    <form class="needs-validation" name="demo-form" action="<%= formActionTarget %>" method="POST" enctype="multipart/form-data" novalidate>
+                            <div class="col-md-12 bg-light-input">
+                                <label for="topic_name" class="form-label col-form-label-lg pb-1">Topic Name <span class="star">*</span></label>
+                                <input type="text" class="form-control bg-light fs-6" name="topic_name" id="topic_name" value="<%= data.topic_name %>" placeholder="E. g. About Us" />
+                                        <% if (status === "Error" && customFieldErrors.topic_name) { %>
+                                            <span class="text-danger"><%= customFieldErrors.topic_name.message %></span>
+                                        <% } %>
+                            </div>
+                            <div class="col-md-12 bg-light-input">
+                                <label for="category" class="form-label col-form-label-lg pb-1">Category <span class="star">*</span></label>
+                                <select class="form-select bg-light fs-6" id="category" name="category" required>
+                                    <option value="">Select Category</option>
+                                    <% _.each(allCategory, function (sinItem) { %>
+                                        <option value="<%= sinItem.id %>" <%= sinItem.id == data.helpCenterCategory ? 'selected' : '' %>><%= sinItem.name %></option>
+                                    <% }) %>
+                                </select>
+                                <% if (status === "Error" && customFieldErrors.category) { %>
+                                    <span class="text-danger"><%= customFieldErrors.category.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-md-12 bg-light-input ">
+                                <label for="status" class="form-label col-form-label-lg pb-1">Status <span class="star">*</span></label>
+                                        <select class="form-select bg-light fs-6" id="status" name="status" >
+                                            <option value="">Please Select</option>
+                                            <option value="1" <%= (data.status == 1) ? 'selected' : '' %>>Active</option>
+                                            <option value="2" <%= (data.status == 2) ? 'selected' : '' %>>Inactive</option>
+                                        </select>
+                                        <% if (status === "Error" && customFieldErrors.status) { %>
+                                            <span class="text-danger"><%= customFieldErrors.status.message %></span>
+                                        <% } %>
+                            </div>
+                            <div class="col-md-12 bg-light-input mb-3">
+                                <label for="description" class="form-label col-form-label-lg pb-1">Description <span class="star">*</span></label>
+                                <textarea class="form-control form-control-lg fs-6" name="description" id="description" placeholder="Write description here" rows="15" ><%= data.description %></textarea>
+                                <% if (status === "Error" && customFieldErrors.description) { %>
+                                    <span class="text-danger"><%= customFieldErrors.description.message %></span>
+                                <% } %>
+                            </div>
+                            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                                <button class="btn btn-dark" type="submit">Submit</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END #content -->
